@@ -10,6 +10,10 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
+import java.io.*;
+import java.sql.*;
+import com.google.appengine.api.utils.SystemProperty;
+
 import javax.inject.Named;
 
 /**
@@ -24,9 +28,43 @@ public class MyEndpoint {
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
+
+        String url = null;
+        try {
+            if (SystemProperty.environment.value() ==
+                    SystemProperty.Environment.Value.Production) {
+                // Load the class that provides the new "jdbc:google:mysql://" prefix.
+                Class.forName("com.mysql.jdbc.GoogleDriver");
+                url = "jdbc:google:mysql://keeper-1337:test" +
+                        "/testDb?user=root";
+            } else {
+                // Local MySQL instance to use during development.
+                Class.forName("com.mysql.jdbc.Driver");
+                url = "jdbc:mysql://127.0.0.1:3306/testDb?user=root";
+
+                // Alternatively, connect to a Google Cloud SQL instance using:
+                // jdbc:mysql://ip-address-of-google-cloud-sql-instance:3306/guestbook?user=root
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setData("It didn't work! " + name);
+            return response;
+        }
+
+        try {
+            Connection conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         response.setData("Hi, " + name);
 
         return response;
     }
+    /*    public MyBean sayHi(@Named("name") String name) {
+        MyBean response = new MyBean();
+        response.setData("Hi, " + name);
 
+        return response;
+    }*/
 }
