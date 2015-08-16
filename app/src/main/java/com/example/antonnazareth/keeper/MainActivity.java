@@ -1,5 +1,6 @@
 package com.example.antonnazareth.keeper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.util.Pair;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -51,6 +53,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+        testEndPoints();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -64,4 +72,10 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void testEndPoints(){
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+    }
 }
+
+
