@@ -12,6 +12,7 @@
 
     <Button
         android:id="@+id/button1"
+        style="@style/CodeFont"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Play"
@@ -19,6 +20,7 @@
 
     <Button
         android:id="@+id/button2"
+        style="@style/CodeFont"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Add Users"
@@ -26,6 +28,7 @@
 
     <Button
         android:id="@+id/button3"
+        style="@style/CodeFont"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Leaderboards"
