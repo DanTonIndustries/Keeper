@@ -22,6 +22,11 @@ import javax.inject.Named;
 @Api(name = "myApi", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.keeper.antonnazareth.example.com", ownerName = "backend.keeper.antonnazareth.example.com", packagePath = ""))
 public class MyEndpoint {
 
+    private String resetDb() {
+        String result = "Aint nothing wrong!";
+        return result;
+    }
+
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
@@ -62,7 +67,7 @@ public class MyEndpoint {
             stmt.setString(1, name);
 
             int success = -1000;
-
+            int res = -3234;
             success = stmt.executeUpdate();
 
 
@@ -71,12 +76,13 @@ public class MyEndpoint {
 
             ResultSet rs = null;
             rs = stmt2.executeQuery();
-            rs.first();
             while (rs.next()){
-                success = rs.getInt(1);
+                res = rs.getInt(1);
             }
+            String resstring = Integer.toString(res);
             String successstring = Integer.toString(success);
-            response.setData("Count of users: " + name + " " +  successstring);
+            response.setData( success + " - Hi, " + name + ", Count of users: "
+                    + resstring);
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -92,4 +98,64 @@ public class MyEndpoint {
 
         return response;
     }*/
+
+    @ApiMethod(name = "rebuildDb")
+    public MyBean rebuildDb() {
+        MyBean response = new MyBean();
+
+        String url = null;
+        try {
+            if (SystemProperty.environment.value() ==
+                    SystemProperty.Environment.Value.Production) {
+                // Load the class that provides the new "jdbc:google:mysql://" prefix.
+                Class.forName("com.mysql.jdbc.GoogleDriver");
+                url = "jdbc:google:mysql://keeper-1337:test" +
+                        "/testDb?user=root";
+
+            } else {
+                Class.forName("com.mysql.jdbc.Driver");
+                url = "jdbc:mysql:///2001:4860:4864:1:b80f:1744:757:dd24:3306/testDb?user=root";
+
+                // Alternatively, connect to a Google Cloud SQL instance using:
+                // jdbc:mysql://2001:4860:4864:1:b80f:1744:757:dd24:3306
+                // /testDb?user=root
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setData("It didn't work! ");
+        }
+
+        try {
+            Connection conn = DriverManager.getConnection(url);
+
+/*
+            String statement = "CREATE TABLE users ( name TEXT )";
+*/
+            String statement = "INSERT INTO users (name) VALUES ( ? )";
+            PreparedStatement stmt = conn.prepareStatement(statement);
+            int success = -1000;
+            int res = -3234;
+            success = stmt.executeUpdate();
+
+
+            String statement2 = "SELECT COUNT(*) FROM users;";
+            PreparedStatement stmt2 = conn.prepareStatement(statement2);
+
+            ResultSet rs = null;
+            rs = stmt2.executeQuery();
+            while (rs.next()){
+                res = rs.getInt(1);
+            }
+            String resstring = Integer.toString(res);
+            String successstring = Integer.toString(success);
+            response.setData( successstring );
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            response.setData("It didn't work part 2! " + e
+                    .getLocalizedMessage());
+        }
+
+        return response;
+    }
 }
