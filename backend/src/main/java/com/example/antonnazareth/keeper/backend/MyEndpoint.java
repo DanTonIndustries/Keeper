@@ -10,94 +10,32 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
-import java.io.*;
-import com.google.appengine.repackaged.org.json.JSONArray;
-import com.google.appengine.repackaged.org.json.JSONObject;
-import com.google.appengine.repackaged.org.json.JSONException;
 import java.sql.*;
 import com.google.appengine.api.utils.SystemProperty;
 
+import java.util.logging.Logger;
+
 import javax.inject.Named;
 
-public class ResultSetConverter {
-    public static JSONArray convert( ResultSet rs )
-            throws SQLException, JSONException
-    {
-        JSONArray json = new JSONArray();
-        ResultSetMetaData rsmd = rs.getMetaData();
-
-        while(rs.next()) {
-            int numColumns = rsmd.getColumnCount();
-            JSONObject obj = new JSONObject();
-
-            for (int i=1; i<numColumns+1; i++) {
-                String column_name = rsmd.getColumnName(i);
-
-                if(rsmd.getColumnType(i)==java.sql.Types.ARRAY){
-                    obj.put(column_name, rs.getArray(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.BIGINT){
-                    obj.put(column_name, rs.getInt(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.BOOLEAN){
-                    obj.put(column_name, rs.getBoolean(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.BLOB){
-                    obj.put(column_name, rs.getBlob(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.DOUBLE){
-                    obj.put(column_name, rs.getDouble(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.FLOAT){
-                    obj.put(column_name, rs.getFloat(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.INTEGER){
-                    obj.put(column_name, rs.getInt(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.NVARCHAR){
-                    obj.put(column_name, rs.getNString(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.VARCHAR){
-                    obj.put(column_name, rs.getString(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.TINYINT){
-                    obj.put(column_name, rs.getInt(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.SMALLINT){
-                    obj.put(column_name, rs.getInt(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.DATE){
-                    obj.put(column_name, rs.getDate(column_name));
-                }
-                else if(rsmd.getColumnType(i)==java.sql.Types.TIMESTAMP){
-                    obj.put(column_name, rs.getTimestamp(column_name));
-                }
-                else{
-                    obj.put(column_name, rs.getObject(column_name));
-                }
-            }
-
-            json.put(obj);
-        }
-
-        return json;
-    }
-}
 
 /**
  * An endpoint class we are exposing
  */
-@Api(name = "myApi", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.keeper.antonnazareth.example.com", ownerName = "backend.keeper.antonnazareth.example.com", packagePath = ""))
+@Api(
+        name = "myApi",
+        version = "v1",
+        namespace = @ApiNamespace(
+                ownerDomain = "backend.keeper.antonnazareth.example.com",
+                ownerName = "backend.keeper.antonnazareth.example.com",
+                packagePath = ""
+        )
+)
 public class MyEndpoint {
 
-
-
-    private String resetDb() {
-        String result = "Aint nothing wrong!";
-        return result;
-    }
+    private static final Logger logger = Logger.getLogger(MyEndpoint.class.getName());
 
     private String geturl() {
+        logger.info("Calling getUrl method");
         String url = null;
         try {
             if (SystemProperty.environment.value() ==
@@ -118,6 +56,7 @@ public class MyEndpoint {
     }
 
     private Connection getConn() {
+        logger.info("Calling getConn method");
         Connection conn = null;
         try{
             String url = geturl();
@@ -127,18 +66,21 @@ public class MyEndpoint {
         return conn;
     }
 
-    private String runStmt(Connection conn, PreparedStatement ps) {
+    private MyBean runStmt(Connection conn, PreparedStatement ps) {
+        logger.info("Calling runStmt method");
+        MyBean bean = new MyBean();
+
         ResultSet rs = null;
         String response = "";
         int updateCount;
         try {
             boolean returnsRs = ps.execute();
             if (returnsRs) {
+
+                ResultSetConverter converter = new ResultSetConverter();
+
                 rs = ps.getResultSet();
-                while(rs.next()){
-                    int val = rs.getInt(1);
-                    response = "Result 1: " + Integer.toString(val) + ", ";
-                }
+                bean.setResultSetData(rs);
             } else {
                 updateCount = ps.getUpdateCount();
                 response = "Update Count: " + Integer.toString(updateCount);
@@ -156,7 +98,8 @@ public class MyEndpoint {
                 response = response +
                     "Conn: " + e.getLocalizedMessage(); }
         }
-        return response;
+        bean.setStringData(response);
+        return bean;
     }
 
     /**
@@ -170,6 +113,7 @@ public class MyEndpoint {
 
     @ApiMethod(name = "addUser")
     public MyBean addUser(@Named("name") String name) {
+        logger.info("Calling addUser method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -181,18 +125,19 @@ public class MyEndpoint {
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1, name);
 
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "countUsers")
     public MyBean countUsers() {
+        logger.info("Calling countUsers method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -203,18 +148,19 @@ public class MyEndpoint {
             String stmt = "SELECT COUNT(*) FROM users;";
             PreparedStatement ps = conn.prepareStatement(stmt);
 
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "buildUsersTable")
     public MyBean buildUsersTable() {
+        logger.info("Calling buildUsersTable method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -235,18 +181,19 @@ public class MyEndpoint {
                     + "name TEXT NOT NULL,"
                     + "PRIMARY KEY(id)) ENGINE=INNODB;";
             ps = conn.prepareStatement(stmt);
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "addTeam")
-         public MyBean addTeam(@Named("name") String name) {
+    public MyBean addTeam(@Named("name") String name) {
+        logger.info("Calling addTeam method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -258,18 +205,19 @@ public class MyEndpoint {
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1, name);
 
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "countTeams")
     public MyBean countTeams() {
+        logger.info("Calling countTeams method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -280,20 +228,20 @@ public class MyEndpoint {
             String stmt = "SELECT COUNT(*) FROM teams;";
             PreparedStatement ps = conn.prepareStatement(stmt);
 
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "buildTeamsTable")
     public MyBean buildTeamsTable() {
-        MyBean bean = new MyBean();
-
+        logger.info("Calling buildTeamsTable method");
+        MyBean bean = null;
         String response = "";
         String stmt;
 
@@ -312,19 +260,20 @@ public class MyEndpoint {
                     + "name TEXT NOT NULL,"
                     + "PRIMARY KEY(id)) ENGINE=INNODB;";
             ps = conn.prepareStatement(stmt);
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "addTeamUser")
     public MyBean addTeamUser(@Named("teamid") String teamid, @Named("userid")
     String userid) {
+        logger.info("Calling addTeamUser method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -338,18 +287,19 @@ public class MyEndpoint {
             ps.setString(1, teamid);
             ps.setString(2, userid);
 
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "countTeamUsers")
     public MyBean countTeamUsers() {
+        logger.info("Calling countTeamUsers method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -360,18 +310,19 @@ public class MyEndpoint {
             String stmt = "SELECT COUNT(*) FROM teamusers;";
             PreparedStatement ps = conn.prepareStatement(stmt);
 
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 
     @ApiMethod(name = "buildTeamUsersTable")
     public MyBean buildTeamUsersTable() {
+        logger.info("Calling buildTeamUsersTable method");
         MyBean bean = new MyBean();
 
         String response = "";
@@ -396,37 +347,13 @@ public class MyEndpoint {
                     "FOREIGN KEY (teamid) REFERENCES teams(id)," +
                     "FOREIGN KEY (userid) REFERENCES users(id)) ENGINE=INNODB;";
             ps = conn.prepareStatement(stmt);
-            response = response + runStmt(conn, ps);
+            bean = runStmt(conn, ps);
 
         } catch (SQLException e){
             response = e.getLocalizedMessage() + ", ";
         }
 
-        bean.setData(response);
-        return bean;
-    }
-
-    @ApiMethod(name = "findError")
-    public MyBean findError() {
-        MyBean bean = new MyBean();
-
-        String response = "";
-        String stmt;
-
-        try {
-            Connection conn;
-            PreparedStatement ps;
-
-            conn = getConn();
-            stmt = "SHOW ENGINE INNODB STATUS";
-            ps = conn.prepareStatement(stmt);
-            response = response + runStmt(conn, ps);
-
-        } catch (SQLException e){
-            response = e.getLocalizedMessage() + ", ";
-        }
-
-        bean.setData(response);
+        bean.addToStringData(response);
         return bean;
     }
 }
