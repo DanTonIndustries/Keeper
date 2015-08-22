@@ -87,7 +87,6 @@ public class MyBean {
     private static final Logger logger = Logger.getLogger(MyBean.class.getName
             ());
 
-
     private String json;
     private String string_extra;
 

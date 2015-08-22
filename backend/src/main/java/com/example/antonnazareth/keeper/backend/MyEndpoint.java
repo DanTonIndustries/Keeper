@@ -356,4 +356,30 @@ public class MyEndpoint {
         bean.addToStringData(response);
         return bean;
     }
+
+
+    @ApiMethod(name = "getTeamScores")
+    public MyBean getTeamScores(@Named("teamname") String teamname) {
+        logger.info("Calling getTeamScores method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT s.* FROM scores s " +
+                    "INNER JOIN teams t ON s.teamid = t.id " +
+                    "WHERE t.name = ?;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setString(1, teamname);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
 }
