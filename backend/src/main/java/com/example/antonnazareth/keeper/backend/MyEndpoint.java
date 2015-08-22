@@ -55,14 +55,12 @@ public class MyEndpoint {
         return url;
     }
 
-    private Connection getConn() {
+    private Connection getConn()
+            throws SQLException {
         logger.info("Calling getConn method");
         Connection conn = null;
-        try{
-            String url = geturl();
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-        }
+        String url = geturl();
+        conn = DriverManager.getConnection(url);
         return conn;
     }
 
@@ -105,13 +103,7 @@ public class MyEndpoint {
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
-        return addUser(name);
-    }
-
-
-    @ApiMethod(name = "addUser")
+    @ApiMethod(name = "addUser", path="add/user")
     public MyBean addUser(@Named("name") String name) {
         logger.info("Calling addUser method");
         MyBean bean = new MyBean();
@@ -135,63 +127,7 @@ public class MyEndpoint {
         return bean;
     }
 
-    @ApiMethod(name = "countUsers")
-    public MyBean countUsers() {
-        logger.info("Calling countUsers method");
-        MyBean bean = new MyBean();
-
-        String response = "";
-
-        try {
-            Connection conn = getConn();
-
-            String stmt = "SELECT COUNT(*) FROM users;";
-            PreparedStatement ps = conn.prepareStatement(stmt);
-
-            bean = runStmt(conn, ps);
-
-        } catch (SQLException e){
-            response = e.getLocalizedMessage() + ", ";
-        }
-
-        bean.addToStringData(response);
-        return bean;
-    }
-
-    @ApiMethod(name = "buildUsersTable")
-    public MyBean buildUsersTable() {
-        logger.info("Calling buildUsersTable method");
-        MyBean bean = new MyBean();
-
-        String response = "";
-        String stmt;
-
-        try {
-            Connection conn;
-            PreparedStatement ps;
-
-            conn = getConn();
-            stmt = "DROP TABLE IF EXISTS users ";
-            ps = conn.prepareStatement(stmt);
-            response = response + runStmt(conn, ps);
-
-            conn = getConn();
-            stmt = "CREATE TABLE users ( "
-                    + "id INT  AUTO_INCREMENT NOT NULL,"
-                    + "name TEXT NOT NULL,"
-                    + "PRIMARY KEY(id)) ENGINE=INNODB;";
-            ps = conn.prepareStatement(stmt);
-            bean = runStmt(conn, ps);
-
-        } catch (SQLException e){
-            response = e.getLocalizedMessage() + ", ";
-        }
-
-        bean.addToStringData(response);
-        return bean;
-    }
-
-    @ApiMethod(name = "addTeam")
+    @ApiMethod(name = "addTeam", path="add/team")
     public MyBean addTeam(@Named("name") String name) {
         logger.info("Calling addTeam method");
         MyBean bean = new MyBean();
@@ -215,7 +151,133 @@ public class MyEndpoint {
         return bean;
     }
 
-    @ApiMethod(name = "countTeams")
+    @ApiMethod(name = "addTeamUser", path="add/teamUser")
+         public MyBean addTeamUser(@Named("teamid") int teamid,
+                                   @Named("userid") int userid) {
+        logger.info("Calling addTeamUser method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "INSERT INTO teamusers (teamid, userid) VALUES (" +
+                    " ?, ? )";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, teamid);
+            ps.setInt(2, userid);
+
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "addGame", path="add/game")
+    public MyBean addGame(@Named("name") String name) {
+        logger.info("Calling addGame method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "INSERT INTO games (name) VALUES ( ? )";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setString(1, name);
+
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "addMatch", path="add/match")
+    public MyBean addMatch(@Named("gameid") int gameid) {
+        logger.info("Calling addMatch method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "INSERT INTO matches (gameid) VALUES ( ? );";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, gameid);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "addScore", path="add/score")
+    public MyBean addScore(@Named("matchid") int matchid,
+                           @Named("teamid") int teamid,
+                           @Named("score") int score) {
+        logger.info("Calling addScore method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "INSERT INTO scores (matchid, teamid, score) VALUES" +
+                    " ( ?, ?, ? );";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, matchid);
+            ps.setInt(2, teamid);
+            ps.setInt(3, score);
+
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "countUsers", path="count/user")
+    public MyBean countUsers() {
+        logger.info("Calling countUsers method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT COUNT(*) FROM users;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "countTeams", path="count/team")
     public MyBean countTeams() {
         logger.info("Calling countTeams method");
         MyBean bean = new MyBean();
@@ -238,66 +300,7 @@ public class MyEndpoint {
         return bean;
     }
 
-    @ApiMethod(name = "buildTeamsTable")
-    public MyBean buildTeamsTable() {
-        logger.info("Calling buildTeamsTable method");
-        MyBean bean = null;
-        String response = "";
-        String stmt;
-
-        try {
-            Connection conn;
-            PreparedStatement ps;
-
-            conn = getConn();
-            stmt = "DROP TABLE IF EXISTS teams ";
-            ps = conn.prepareStatement(stmt);
-            response = response + runStmt(conn, ps);
-
-            conn = getConn();
-            stmt = "CREATE TABLE teams ( "
-                    + "id INT  AUTO_INCREMENT NOT NULL,"
-                    + "name TEXT NOT NULL,"
-                    + "PRIMARY KEY(id)) ENGINE=INNODB;";
-            ps = conn.prepareStatement(stmt);
-            bean = runStmt(conn, ps);
-
-        } catch (SQLException e){
-            response = e.getLocalizedMessage() + ", ";
-        }
-
-        bean.addToStringData(response);
-        return bean;
-    }
-
-    @ApiMethod(name = "addTeamUser")
-    public MyBean addTeamUser(@Named("teamid") String teamid, @Named("userid")
-    String userid) {
-        logger.info("Calling addTeamUser method");
-        MyBean bean = new MyBean();
-
-        String response = "";
-
-        try {
-            Connection conn = getConn();
-
-            String stmt = "INSERT INTO teamusers (teamid, userid) VALUES (" +
-                    " ?, ? )";
-            PreparedStatement ps = conn.prepareStatement(stmt);
-            ps.setString(1, teamid);
-            ps.setString(2, userid);
-
-            bean = runStmt(conn, ps);
-
-        } catch (SQLException e){
-            response = e.getLocalizedMessage() + ", ";
-        }
-
-        bean.addToStringData(response);
-        return bean;
-    }
-
-    @ApiMethod(name = "countTeamUsers")
+    @ApiMethod(name = "countTeamUsers", path="count/teamUser")
     public MyBean countTeamUsers() {
         logger.info("Calling countTeamUsers method");
         MyBean bean = new MyBean();
@@ -320,33 +323,19 @@ public class MyEndpoint {
         return bean;
     }
 
-    @ApiMethod(name = "buildTeamUsersTable")
-    public MyBean buildTeamUsersTable() {
-        logger.info("Calling buildTeamUsersTable method");
+    @ApiMethod(name = "countScores", path="count/score")
+    public MyBean countScores() {
+        logger.info("Calling countScores method");
         MyBean bean = new MyBean();
 
         String response = "";
-        String stmt;
 
         try {
-            Connection conn;
-            PreparedStatement ps;
+            Connection conn = getConn();
 
-            conn = getConn();
-            stmt = "DROP TABLE IF EXISTS teamusers ";
-            ps = conn.prepareStatement(stmt);
-            response = response + runStmt(conn, ps);
+            String stmt = "SELECT COUNT(*) FROM scores;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
 
-            conn = getConn();
-            stmt = "CREATE TABLE teamusers ( " +
-                    "teamid INT NOT NULL," +
-                    "userid INT NOT NULL," +
-                    "PRIMARY KEY(teamid, userid)," +
-                    "INDEX (teamid)," +
-                    "INDEX (userid)," +
-                    "FOREIGN KEY (teamid) REFERENCES teams(id)," +
-                    "FOREIGN KEY (userid) REFERENCES users(id)) ENGINE=INNODB;";
-            ps = conn.prepareStatement(stmt);
             bean = runStmt(conn, ps);
 
         } catch (SQLException e){
@@ -357,9 +346,192 @@ public class MyEndpoint {
         return bean;
     }
 
+    @ApiMethod(name = "countMatches", path="count/match")
+    public MyBean countMatches() {
+        logger.info("Calling countMatches method");
+        MyBean bean = new MyBean();
 
-    @ApiMethod(name = "getTeamScores")
-    public MyBean getTeamScores(@Named("teamname") String teamname) {
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT COUNT(*) FROM matches;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "countGames", path="count/game")
+    public MyBean countGames() {
+        logger.info("Calling countTeamUsers method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT COUNT(*) FROM games;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getUsers", path="query/user")
+    public MyBean getUsers() {
+        logger.info("Calling getUsers method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT u.* FROM users u;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getTeams", path="query/team")
+    public MyBean getTeams() {
+        logger.info("Calling getTeams method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT t.* FROM teams t;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getMatches", path="query/match")
+    public MyBean getMatches() {
+        logger.info("Calling getMatches method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT m.* FROM matches m;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getGames", path="query/game")
+    public MyBean getGames() {
+        logger.info("Calling getGames method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT g.* FROM games g;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getTeamUsers", path="query/teamUser")
+    public MyBean getTeamUsers(@Named("teamid") int teamid) {
+        logger.info("Calling getTeamScores method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT u.* FROM users u " +
+                    "INNER JOIN teamusers tu ON tu.userid = u.id " +
+                    "WHERE tu.teamid = ?;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, teamid);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getUserTeams", path="query/userTeam")
+    public MyBean getUserTeams(@Named("userid") int userid) {
+        logger.info("Calling getTeamScores method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT t.* FROM teams t " +
+                    "INNER JOIN teamusers tu ON tu.teamid = t.id " +
+                    "WHERE tu.userid = ?;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, userid);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getTeamScores", path="query/teamScore")
+    public MyBean getTeamScores(@Named("teamid") int teamid) {
         logger.info("Calling getTeamScores method");
         MyBean bean = new MyBean();
 
@@ -369,10 +541,9 @@ public class MyEndpoint {
             Connection conn = getConn();
 
             String stmt = "SELECT s.* FROM scores s " +
-                    "INNER JOIN teams t ON s.teamid = t.id " +
-                    "WHERE t.name = ?;";
+                    "WHERE s.teamid = ?;";
             PreparedStatement ps = conn.prepareStatement(stmt);
-            ps.setString(1, teamname);
+            ps.setInt(1, teamid);
             bean = runStmt(conn, ps);
 
         } catch (SQLException e){
@@ -382,4 +553,53 @@ public class MyEndpoint {
         bean.addToStringData(response);
         return bean;
     }
+
+    @ApiMethod(name = "getMatchScores", path="query/matchScore")
+    public MyBean getMatchScores(@Named("matchid") int matchid) {
+        logger.info("Calling getMatchScores method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT s.* FROM scores s " +
+                    "WHERE s.matchid = ?;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, matchid);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getGameMatches", path="query/gameMatch")
+    public MyBean getGameMatches(@Named("gameid") int gameid) {
+        logger.info("Calling getGameMatches method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT m.* FROM matches m " +
+                    "WHERE m.gameid = ?;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, gameid);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
 }
