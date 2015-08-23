@@ -17,10 +17,20 @@ package com.example.antonnazareth.keeper.data;
 
 //import com.example.antonnazareth.keeper.data.KeeperContract.Team2UserEntry;
 
-
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
+
+import com.example.antonnazareth.keeper.EntityClasses.UserEntity;
+import com.example.antonnazareth.keeper.backend.myApi.MyApi;
+import com.example.antonnazareth.keeper.backend.myApi.model.MyBean;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 /**
  * Manages a local database for weather data.
@@ -29,8 +39,9 @@ public class dbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 2;
-
     public static final String DATABASE_NAME = "keeper.db";
+
+    private static MyApi myApiService = null;
 
     public dbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,7 +55,6 @@ public class dbHelper extends SQLiteOpenHelper {
                 KeeperContract.UserEntry.COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KeeperContract.UserEntry.COLUMN_FIRST_NAME + " TEXT NOT NULL, " +
                 KeeperContract.UserEntry.COLUMN_LAST_NAME + " TEXT NOT NULL, " +
-                KeeperContract.UserEntry.COLUMN_FULL_NAME + " TEXT UNIQUE NOT NULL, " +
                 KeeperContract.UserEntry.COLUMN_NICKNAME + " REAL NOT NULL " +
                 " );";
 
@@ -91,4 +101,5 @@ public class dbHelper extends SQLiteOpenHelper {
 
         onCreate(sqLiteDatabase);
     }
+
 }

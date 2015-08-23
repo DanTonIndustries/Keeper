@@ -24,6 +24,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        dbHelper dbhelper = new dbHelper(this.getApplicationContext());
+
         setContentView(R.layout.activity_main);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/DistProTh.ttf");
 
@@ -116,7 +118,6 @@ public class MainActivity extends ActionBarActivity {
         ContentValues userValues = new ContentValues();
         userValues.put(KeeperContract.UserEntry.COLUMN_FIRST_NAME, "test");
         userValues.put(KeeperContract.UserEntry.COLUMN_LAST_NAME, "test");
-        userValues.put(KeeperContract.UserEntry.COLUMN_FULL_NAME, "test");
         userValues.put(KeeperContract.UserEntry.COLUMN_NICKNAME, "test");
 
         return userValues;

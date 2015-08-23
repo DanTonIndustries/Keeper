@@ -27,11 +27,12 @@ public class KeeperContract {
     // as the ContentProvider hasn't been given any information on what to do with "givemeroot".
     // At least, let's hope not.  Don't be that dev, reader.  Don't be that dev.
 
-    public static final String PATH_USER = "user";
-    public static final String PATH_TEAMS = "team";
-    public static final String TEAMS_2_USER = "team2user";
-
-
+    public static final String PATH_USER = "users";
+    public static final String PATH_TEAMS = "teams";
+    public static final String PATH_USERTEAMS = "userteams";
+    public static final String PATH_GAMES = "games";
+    public static final String PATH_MATCHES = "matches";
+    public static final String PATH_SCORES = "scores";
 
     /* Inner class that defines the table contents of the location table */
     public static final class UserEntry implements BaseColumns {
@@ -45,12 +46,10 @@ public class KeeperContract {
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_USER;
 
         // Table name
-
-        public static final String TABLE_NAME = "user";
+        public static final String TABLE_NAME = "users";
         public static final String COLUMN_USER_ID = "user_id";
         public static final String COLUMN_FIRST_NAME = "first_name";
         public static final String COLUMN_LAST_NAME = "last_name";
-        public static final String COLUMN_FULL_NAME = "full_name";
         public static final String COLUMN_NICKNAME = "nickname";
 
         public static Uri buildUserUri(long id) {

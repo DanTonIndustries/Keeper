@@ -92,12 +92,9 @@ public class AddUserActivity extends ActionBarActivity {
         dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
         SQLiteDatabase db = tDbHelper.getWritableDatabase();
 
-        String fullName = firstName + lastName;
-
         ContentValues userValues = new ContentValues();
         userValues.put(KeeperContract.UserEntry.COLUMN_FIRST_NAME, firstName);
         userValues.put(KeeperContract.UserEntry.COLUMN_LAST_NAME, lastName);
-        userValues.put(KeeperContract.UserEntry.COLUMN_FULL_NAME, fullName);
         userValues.put(KeeperContract.UserEntry.COLUMN_NICKNAME, nickname);
 
         long userRowId;
@@ -106,11 +103,8 @@ public class AddUserActivity extends ActionBarActivity {
         return userRowId;
     }
 
-
     public void clearDb(){
         this.getApplicationContext().deleteDatabase(dbHelper.DATABASE_NAME);
-
     }
-
 
 }
