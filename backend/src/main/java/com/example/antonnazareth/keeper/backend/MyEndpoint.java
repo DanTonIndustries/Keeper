@@ -152,8 +152,8 @@ public class MyEndpoint {
     }
 
     @ApiMethod(name = "addTeamUser", path="add/teamUser")
-         public MyBean addTeamUser(@Named("teamid") int teamid,
-                                   @Named("userid") int userid) {
+    public MyBean addTeamUser(@Named("teamid") int teamid,
+                              @Named("userid") int userid) {
         logger.info("Calling addTeamUser method");
         MyBean bean = new MyBean();
 
