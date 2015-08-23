@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 //insertIntoDatabase();
-                Intent launchSettingsIntent = new Intent(view.getContext(), AddUserActivity.class);
+                Intent launchSettingsIntent = new Intent(view.getContext(), UserTeamViewActivity.class);
                 startActivity(launchSettingsIntent);
             }
         });

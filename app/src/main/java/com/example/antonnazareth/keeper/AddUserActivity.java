@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -18,6 +19,8 @@ import com.example.antonnazareth.keeper.data.dbHelper;
 
 public class AddUserActivity extends ActionBarActivity {
 
+    private String customFont = uiUtilities.CUSTOM_FONT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +32,11 @@ public class AddUserActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add_user, menu);
 
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
+
         Button clearDbButton = (Button) findViewById(R.id.clearDb);
+
         clearDbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +45,8 @@ public class AddUserActivity extends ActionBarActivity {
         });
 
         Button addUser = (Button) findViewById(R.id.button20);
+        addUser.setTypeface(font);
+
         addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

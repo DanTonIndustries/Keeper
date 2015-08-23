@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -24,6 +25,7 @@ public class selectUserActivity extends ActionBarActivity {
 
     //public ArrayAdapter<String> mUserAdapter;
     public CustomAdapter mUserAdapter;
+    private String customFont = uiUtilities.CUSTOM_FONT;
 
 
     @Override
@@ -31,7 +33,11 @@ public class selectUserActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_user);
 
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
         Button addUser = (Button) findViewById(R.id.addUserFromSelect);
+        addUser.setTypeface(font);
+
         addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +61,7 @@ public class selectUserActivity extends ActionBarActivity {
 //                        R.id.user_list_item_textView, // The ID of the textview to populate.
 //                        arrayList);
 
-        mUserAdapter = new CustomAdapter(this, arrayList);
+        mUserAdapter = new CustomAdapter(this, arrayList, R.drawable.user);
 
         // Get a reference to the ListView, and attach this adapter to it.
         listView.setAdapter(mUserAdapter);

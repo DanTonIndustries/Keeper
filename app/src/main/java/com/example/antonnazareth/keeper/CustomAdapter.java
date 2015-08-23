@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,21 +17,28 @@ import java.util.ArrayList;
 /**
  * Created by antonnazareth on 22/08/2015.
  */
+
+
 public class CustomAdapter extends BaseAdapter {
     ArrayList<String> result;
     Context context;
+    int imageId;
     //OnClickListener clickListener;
-    int [] imageId;
+    //private String customFont = uiUtilities.CUSTOM_FONT;
+
+
+
 
     private static LayoutInflater inflater=null;
 
 //    public CustomAdapter(Activity activity, String[] itemStrings, int[] itemImages) {
-    public CustomAdapter(Activity activity, ArrayList<String> itemStrings){//}, OnClickListener clickListen) {
+    public CustomAdapter(Activity activity, ArrayList<String> itemStrings, int imageResource){//}, OnClickListener clickListen) {
 
         result=itemStrings;
         context=activity;
         //clickListener = clickListen;
         //imageId=itemImages;
+        imageId=imageResource;
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -59,8 +67,8 @@ public class CustomAdapter extends BaseAdapter {
     public class Holder
     {
         TextView tv;
-        Button btn;
-        //ImageView img;
+        ImageButton btn;
+        ImageView img;
     }
 
     public void add(String text){
@@ -86,14 +94,22 @@ public class CustomAdapter extends BaseAdapter {
 
         Holder holder=new Holder();
 
+
+
         View rowView;
+
         rowView = inflater.inflate(R.layout.generic_list_item, null);
+
+        //Typeface font = Typeface.createFromAsset(context.getAssets(), customFont);
 
         holder.tv=(TextView) rowView.findViewById(R.id.textView1);
         String res = result.get(position);
         holder.tv.setText(res);
+        holder.img = (ImageView) rowView.findViewById(R.id.imageView1);
+        holder.img.setImageResource(imageId);
+        //holder.tv.setTypeface(font);
 
-        holder.btn=(Button) rowView.findViewById(R.id.delete_btn);
+        holder.btn=(ImageButton) rowView.findViewById(R.id.delete_btn);
 
         holder.btn.setOnClickListener(new OnClickListener() {
 

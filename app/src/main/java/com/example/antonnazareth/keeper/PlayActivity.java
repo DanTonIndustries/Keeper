@@ -1,6 +1,7 @@
 package com.example.antonnazareth.keeper;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -11,30 +12,31 @@ import android.widget.Button;
 
 public class PlayActivity extends ActionBarActivity {
 
+    private String customFont = uiUtilities.CUSTOM_FONT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_play, menu);
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
         final Button foozButton = (Button) findViewById(R.id.button5);
+        foozButton.setTypeface(font);
+
         foozButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String tag = foozButton.getTag().toString();
                 Intent launchSettingsIntent = new Intent(view.getContext(), MatchActivity.class)
-                    .putExtra(Intent.EXTRA_TEXT, tag);
+                        .putExtra(Intent.EXTRA_TEXT, tag);
 
                 startActivity(launchSettingsIntent);
             }
         });
 
         final Button genericButton = (Button) findViewById(R.id.button6);
+        genericButton.setTypeface(font);
+
         genericButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +46,14 @@ public class PlayActivity extends ActionBarActivity {
                 startActivity(launchSettingsIntent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_play, menu);
+
+
         return true;
     }
 

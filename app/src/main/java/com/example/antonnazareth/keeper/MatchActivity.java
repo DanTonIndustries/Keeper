@@ -2,6 +2,7 @@ package com.example.antonnazareth.keeper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -20,6 +21,7 @@ public class MatchActivity extends ActionBarActivity {
     private int teamTwoScore;
     private String TEAM_ONE_NAME = "teamOneName";
     private String TEAM_TWO_NAME = "teamTwoName";
+    private String customFont = uiUtilities.CUSTOM_FONT;
 
 
     @Override
@@ -27,6 +29,8 @@ public class MatchActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_match);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
         if (savedInstanceState != null) {
             // Restore value of members from saved state
@@ -42,12 +46,19 @@ public class MatchActivity extends ActionBarActivity {
         //matchTitle.setText(Title);
 
         TextView teamNameView = (TextView) findViewById(R.id.team1Text);
+       // teamNameView.setTypeface(font);
         teamNameView.setText(teamOneName);
 
         TextView team2NameView = (TextView) findViewById(R.id.team2Text);
+        //team2NameView.setTypeface(font);
         team2NameView.setText(teamTwoName);
 
+        EditText editText = (EditText) findViewById(R.id.scoreText2);
+        editText.setRawInputType(2);
+
+
         Button enterScoreButton = (Button) findViewById(R.id.button9);
+        enterScoreButton.setTypeface(font);
         enterScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +68,7 @@ public class MatchActivity extends ActionBarActivity {
         });
 
         final Button sel1Button = (Button) findViewById(R.id.selectTeam1Button);
+        sel1Button.setTypeface(font);
         sel1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +80,7 @@ public class MatchActivity extends ActionBarActivity {
         });
 
         final Button sel2Button = (Button) findViewById(R.id.selectTeam2Button);
+        sel2Button.setTypeface(font);
         sel2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +92,7 @@ public class MatchActivity extends ActionBarActivity {
         });
 
         Button plusButton1 = (Button) findViewById(R.id.plusButton1);
+        plusButton1.setTypeface(font);
         plusButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +101,7 @@ public class MatchActivity extends ActionBarActivity {
         });
 
         Button minusButton1 = (Button) findViewById(R.id.minusButton1);
+        minusButton1.setTypeface(font);
         minusButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +110,7 @@ public class MatchActivity extends ActionBarActivity {
         });
 
         Button plusButton2 = (Button) findViewById(R.id.plusButton2);
+        plusButton2.setTypeface(font);
         plusButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

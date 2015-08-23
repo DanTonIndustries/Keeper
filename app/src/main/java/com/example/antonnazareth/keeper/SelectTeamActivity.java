@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -26,11 +27,15 @@ public class SelectTeamActivity extends ActionBarActivity {
     //public ArrayAdapter<String> mTeamAdapter;
     public CustomAdapter mTeamAdapt;
 
+    private String customFont = uiUtilities.CUSTOM_FONT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_team);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
 
 
         ListView listView = (ListView) findViewById(R.id.list_view_teams);
@@ -47,8 +52,7 @@ public class SelectTeamActivity extends ActionBarActivity {
 //                        R.layout.team_list_item, // The name of the layout ID.
 //                        R.id.team_list_item_textView, // The ID of the textview to populate.
 //                        arrayList);
-
-        mTeamAdapt = new CustomAdapter(this, arrayList);
+        mTeamAdapt = new CustomAdapter(this, arrayList, R.drawable.team_shirt);
 
         // Get a reference to the ListView, and attach this adapter to it.
         //listView.setAdapter(mTeamAdapter);
@@ -58,6 +62,9 @@ public class SelectTeamActivity extends ActionBarActivity {
 
         Intent intent = this.getIntent();
         final String teamNumber = intent.getStringExtra(Intent.EXTRA_TEXT);
+
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -83,9 +90,9 @@ public class SelectTeamActivity extends ActionBarActivity {
             }
         });
 
-
-
         Button addTeam = (Button) findViewById(R.id.addTeam);
+        addTeam.setTypeface(font);
+
         addTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

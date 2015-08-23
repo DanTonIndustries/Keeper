@@ -1,6 +1,7 @@
 package com.example.antonnazareth.keeper;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -13,6 +14,8 @@ import android.widget.Spinner;
 
 public class AddActivtyActivity extends ActionBarActivity {
 
+    private String customFont = uiUtilities.CUSTOM_FONT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,8 @@ public class AddActivtyActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add_activty, menu);
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.no_of_players_array,

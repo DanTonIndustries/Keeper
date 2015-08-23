@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/list_selector"
     android:orientation="horizontal"
+    android:paddingTop="@dimen/activity_tiny_margin"
+    android:paddingBottom="@dimen/activity_tiny_margin"
     android:descendantFocusability="blocksDescendants" >
 
     <ImageView
@@ -22,25 +24,26 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:textSize="25dp"
         android:text="TextView"
+        android:paddingLeft="30sp"
+        style="@style/listViewTextItem"
         android:layout_weight="1"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/delete_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="X"
+        android:layout_width="8dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|center_horizontal"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
         android:layout_marginTop="5sp"
         android:layout_marginBottom="5sp"
-        android:onClick="removeItemFromDb"
-        android:layout_weight="0.1"/>
+        android:background="@drawable/delete_button_selector"
+        android:layout_weight="0.1" />
 
 </LinearLayout>
 
