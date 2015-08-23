@@ -5,16 +5,16 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_activity2">Activity2Activity</string>
     <string name="title_activity_add_activity2">AddActivity2Activity</string>
-    <string name="title_activity_play">PlayActivity</string>
-    <string name="title_activity_add_activty">AddActivtyActivity</string>
+    <string name="title_activity_play">Choose Activity</string>
+    <string name="title_activity_add_activty">Add Activity</string>
     <string name="title_activity_chosen_act">ChosenActActivity</string>
-    <string name="title_activity_game">GameActivity</string>
-    <string name="title_activity_match">MatchActivity</string>
+    <string name="title_activity_game">Select Score Option</string>
+    <string name="title_activity_match">Enter Score</string>
     <string name="title_activity_add_user">AddUserActivity</string>
     <string name="title_activity_leaderboard_choice2">LeaderboardChoice2Activity</string>
-    <string name="title_activity_lb_game_choice">LbGameChoiceActivity</string>
-    <string name="title_activity_lb_player_choice">LbPlayerChoiceActivity</string>
-    <string name="title_activity_leaderboard">LeaderboardActivity</string>
+    <string name="title_activity_lb_game_choice">Choose Activity</string>
+    <string name="title_activity_lb_player_choice">Choose Player Type</string>
+    <string name="title_activity_leaderboard">Leaderboard</string>
 
 
     <string-array name="no_of_players_array">
@@ -23,5 +23,8 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+    <string name="title_activity_add_team">AddTeam</string>
+    <string name="title_activity_select_team">SelectTeamActivity</string>
+    <string name="title_activity_select_user">selectUserActivity</string>
 
 </resources>
