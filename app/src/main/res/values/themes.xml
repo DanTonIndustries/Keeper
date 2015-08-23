@@ -1,0 +1,15 @@
+<resources>
+    <style name="TestTheme" parent="@style/AppTheme">
+        <item name="android:buttonStyle">@style/button</item>
+        <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+        <item name="android:listViewStyle">@style/listView</item>
+    </style>
+
+    <style name="MainActFullTheme" parent="@style/MainActTheme">
+        <item name="android:buttonStyle">@style/button</item>
+        <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+        <item name="android:listViewStyle">@style/listView</item>
+    </style>
+</resources>

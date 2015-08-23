@@ -1,0 +1,183 @@
+package com.example.antonnazareth.keeper;
+
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import com.example.antonnazareth.keeper.data.KeeperContract;
+import com.example.antonnazareth.keeper.data.dbHelper;
+
+import java.util.ArrayList;
+
+
+public class AddTeam extends ActionBarActivity {
+
+    public ArrayAdapter<String> mTeamUsersAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_team);
+
+
+        //inherit from selectTeam
+        //Intent addUserIntent = getIntent();
+        //final String teamNumber = addUserIntent.getStringExtra(Intent.EXTRA_TEXT);
+
+        ListView listView = (ListView) findViewById(R.id.list_view_team_users);
+        String[] values = new String[]{};
+
+        ArrayList<String> arrayList = new ArrayList<String>();
+        for (int i = 0; i < values.length; ++i) {
+            arrayList.add(values[i]);
+        }
+
+        mTeamUsersAdapter =
+                new ArrayAdapter<String>(
+                        this, // The current context (this activity)
+                        R.layout.team_users_list_item, // The name of the layout ID.
+                        R.id.team_user_list_item_textView, // The ID of the textview to populate.
+                        arrayList);
+
+
+        // Get a reference to the ListView, and attach this adapter to it.
+        listView.setAdapter(mTeamUsersAdapter);
+
+        queryDatabase();
+
+        Button addUserButton = (Button) findViewById(R.id.addUserToTeam);
+        addUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addUserIntent = new Intent(view.getContext(), selectUserActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, "1");
+                startActivityForResult(addUserIntent, 0);
+            }
+        });
+
+        Button confirmTeamButton = (Button) findViewById(R.id.confirmTeam);
+        confirmTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText teamNameEditText = (EditText) findViewById(R.id.teamNameEditTxt);
+                String teamName = teamNameEditText.getText().toString();
+                if (teamName.equals("")){
+                    //please enter team name
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }
+                else{
+                    insertIntoDatabase(teamName);
+                    Intent returnTeamNameIntent = new Intent(view.getContext(), SelectTeamActivity.class)
+                            .putExtra("teamName", teamName);
+                    setResult(RESULT_OK, returnTeamNameIntent);
+                    finish();
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_add_team, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent intent) {
+        if(resultCode == Activity.RESULT_OK ) {
+
+            String userName = intent.getExtras().getString("userName");
+            updateTeamList(userName);
+
+        }
+
+    }
+
+    public void updateTeamList(String userName){
+        mTeamUsersAdapter.add(userName);
+    }
+
+    public void confirmTeam() {
+        String bob = "1";
+    }
+
+    public long insertIntoDatabase(String teamName){
+
+        //this.getApplicationContext().deleteDatabase(dbHelper.DATABASE_NAME);
+
+        dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
+        SQLiteDatabase db = tDbHelper.getWritableDatabase();
+
+        // Second Step: Create ContentValues of what you want to insert
+        // (you can use the createNorthPoleLocationValues if you wish)
+        ContentValues teamValues = new ContentValues();
+        teamValues.put(KeeperContract.TeamEntry.COLUMN_TEAM_NAME, teamName);
+
+
+        // Third Step: Insert ContentValues into database and get a row ID back
+        long userRowId;
+        userRowId = db.insert(KeeperContract.TeamEntry.TABLE_NAME, null, teamValues);
+        db.close();
+        return userRowId;
+    }
+
+    public void queryDatabase(){
+
+        mTeamUsersAdapter.clear();
+
+        dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
+        SQLiteDatabase db = tDbHelper.getReadableDatabase(); //needs to BE DONE ON ASYNCTASK!!!
+        // A cursor is your primary interface to the query results.
+        Cursor cursor = db.query(
+                KeeperContract.TeamEntry.TABLE_NAME,  // Table to Query
+                null, // all columns
+                null, // Columns for the "where" clause
+                null, // Values for the "where" clause
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String teamName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(KeeperContract.TeamEntry.COLUMN_TEAM_NAME)
+            );
+            updateTeamList(teamName);
+            cursor.moveToNext();
+        }
+
+        db.close();
+
+    }
+}
