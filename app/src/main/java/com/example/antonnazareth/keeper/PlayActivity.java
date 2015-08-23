@@ -22,29 +22,25 @@ public class PlayActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_play, menu);
 
-        Button addActivityButton = (Button) findViewById(R.id.button4);
-        addActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent launchSettingsIntent = new Intent(view.getContext(), AddActivtyActivity.class);
-                startActivity(launchSettingsIntent);
-            }
-        });
-
-        Button foozButton = (Button) findViewById(R.id.button5);
+        final Button foozButton = (Button) findViewById(R.id.button5);
         foozButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent launchSettingsIntent = new Intent(view.getContext(), GameActivity.class);
+                String tag = foozButton.getTag().toString();
+                Intent launchSettingsIntent = new Intent(view.getContext(), MatchActivity.class)
+                    .putExtra(Intent.EXTRA_TEXT, tag);
+
                 startActivity(launchSettingsIntent);
             }
         });
 
-        Button teaButton = (Button) findViewById(R.id.button6);
-        teaButton.setOnClickListener(new View.OnClickListener() {
+        final Button genericButton = (Button) findViewById(R.id.button6);
+        genericButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent launchSettingsIntent = new Intent(view.getContext(), GameActivity.class);
+                String genTag = genericButton.getTag().toString();
+                Intent launchSettingsIntent = new Intent(view.getContext(), MatchActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, genTag);
                 startActivity(launchSettingsIntent);
             }
         });
