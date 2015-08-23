@@ -6,11 +6,88 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowSoftInputMode">adjustPan</item>
+
     </style>
-    <style name="CodeFont" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">#ff000000</item>
-        <item name="android:typeface">monospace</item>
-        <item name="android:background">#ffff0f00</item>
+    <style name="MainActTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!--<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>-->
+
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="button" parent="@android:style/Widget.Button">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_states</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+    <style name="listView" parent="@android:style/Widget.ListView">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+    </style>
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+    </style>
+    <!-- TextView Empty Base
+    <style name="TextViewBase" parent="android:TextAppearance.Holo.Widget.TextView"/>-->
+
+    <!-- ActionBar Title -->
+    <style name="CustomActionBarTitleBase" parent="TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+
+    <style name="HeadingStyle" parent="TextAppearance.AppCompat.Display4">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <!-- Text Views Default Base
+
+    <style name="TextViewDisplay3" parent="TextAppearance.AppCompat.Display3">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
 
+    <style name="TextViewDisplay2" parent="TextAppearance.AppCompat.Display2">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="TextViewDisplay1" parent="TextAppearance.AppCompat.Display1">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="TextViewHeadline" parent="TextAppearance.AppCompat.Headline">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="TextViewTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+    </style>
+
+    <style name="TextViewSubhead" parent="TextAppearance.AppCompat.Subhead">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="TextViewBody2" parent="TextAppearance.AppCompat.Body2">
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+    </style>
+
+    <style name="TextViewBody1" parent="TextAppearance.AppCompat.Body1">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="TextViewCaption" parent="TextAppearance.AppCompat.Caption">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="TextViewMenu" parent="TextAppearance.AppCompat.Menu"/>
+
+    <style name="TextViewButton" parent="TextAppearance.AppCompat.Button">
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+    </style>
+
+     For some reason if we dont add the allCapps attribute it is not reflected in all versions
+    <style name="TextViewButtonAllCaps" parent="TextViewButton">
+        <item name="android:textAllCaps">true</item>-->
 </resources>

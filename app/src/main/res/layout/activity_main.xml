@@ -2,35 +2,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/bg_image_test"
+    android:paddingLeft="@dimen/activity_big_margin"
+    android:paddingRight="@dimen/activity_big_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="2.5"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.4"
+        android:src="@drawable/oie_transparent"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="0.2
+        "/>
+
     <Button
         android:id="@+id/button1"
-        style="@style/CodeFont"
+        style="@style/button"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Play"
-        android:layout_weight="1"/>
+        android:text="PLAY"
+        android:layout_weight="0.65"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="0.2"/>
 
     <Button
         android:id="@+id/button2"
-        style="@style/CodeFont"
+        style="@style/button"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Add Users"
-        android:layout_weight="1"/>
+        android:text="USERS / TEAMS"
+        android:layout_weight="0.65"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="0.1"/>
 
     <Button
         android:id="@+id/button3"
-        style="@style/CodeFont"
+        style="@style/button"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Leaderboards"
-        android:layout_weight="1"/>
+        android:text="LEADERBOARDS"
+        android:layout_weight="0.65"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="3"/>
+
+
+
 </LinearLayout>
+
+
+

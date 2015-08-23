@@ -9,25 +9,35 @@
     android:orientation="vertical"
     tools:context="com.example.antonnazareth.keeper.PlayActivity">
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Add Activity"
-        android:layout_weight="1"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="3"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="0.1"/>
 
     <Button
         android:id="@+id/button5"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Fooz"
+        android:tag="Fooz"
         android:layout_weight="1"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="0.1"/>
 
     <Button
         android:id="@+id/button6"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Tea Making"
+        android:text="Generic Point Scoring"
+        android:tag="Generic"
         android:layout_weight="1"/>
 
 </LinearLayout>
