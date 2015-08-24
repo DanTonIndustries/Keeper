@@ -7,22 +7,30 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.antonnazareth.keeper.data.DatabaseManager;
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
 
+import java.util.logging.Logger;
 
-//TODO: do I need to change this to appcompatactivity
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends AppCompatActivity {
+    private static final Logger logger = Logger.getLogger(MainActivity.class
+            .getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        logger.warning("onCreate");
+        DatabaseManager.updateLocalDatabase(this);
 
         dbHelper dbhelper = new dbHelper(this.getApplicationContext());
 

@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.antonnazareth.keeper.EntityClasses.UserEntity;
-import com.example.antonnazareth.keeper.data.UpdateUsers;
 import com.example.antonnazareth.keeper.data.UserAdapter;
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
@@ -31,8 +30,12 @@ public class selectUserActivity extends AppCompatActivity {
     public void getAllUsers() {
         //TODO: Check time of last appengine call, update local db if needed.
         dbHelper dbhelper = new dbHelper(this.getApplicationContext());
+/*
         UpdateUsers asyncusers = new UpdateUsers(this.getApplicationContext());
+*/
+/*
         asyncusers.execute();
+*/
 
         //TODO: Read from local db and build UserEntity instances.
         SQLiteDatabase db = dbhelper.getReadableDatabase();

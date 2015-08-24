@@ -47,9 +47,9 @@ public class KeeperContract {
 
         // Table name
         public static final String TABLE_NAME = "users";
-        public static final String COLUMN_USER_ID = "user_id";
-        public static final String COLUMN_FIRST_NAME = "first_name";
-        public static final String COLUMN_LAST_NAME = "last_name";
+        public static final String COLUMN_USER_ID = "id";
+        public static final String COLUMN_FIRST_NAME = "forename";
+        public static final String COLUMN_LAST_NAME = "surname";
         public static final String COLUMN_NICKNAME = "nickname";
 
         public static Uri buildUserUri(long id) {
@@ -69,8 +69,8 @@ public class KeeperContract {
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
 
         public static final String TABLE_NAME = "team";
-        public static final String COLUMN_TEAM_ID = "team_id";
-        public static final String COLUMN_TEAM_NAME = "team_name";
+        public static final String COLUMN_TEAM_ID = "id";
+        public static final String COLUMN_TEAM_NAME = "name";
 
         public static Uri buildTeamUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

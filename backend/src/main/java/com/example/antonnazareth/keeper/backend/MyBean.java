@@ -33,35 +33,34 @@ class ResultSetConverter {
                             (column_name)));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.BIGINT){
-                    obj.addProperty(column_name, gson.toJson(rs.getInt
-                            (column_name)));
+                    obj.addProperty(column_name, rs.getInt(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.BOOLEAN){
-                    obj.addProperty(column_name, gson.toJson(rs.getBoolean(column_name)));
+                    obj.addProperty(column_name, rs.getBoolean(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.BLOB){
-                    obj.addProperty(column_name, gson.toJson(rs.getBlob(column_name)));
+                    obj.addProperty(column_name, rs.getString(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.DOUBLE){
-                    obj.addProperty(column_name, gson.toJson(rs.getDouble(column_name)));
+                    obj.addProperty(column_name, rs.getDouble(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.FLOAT){
-                    obj.addProperty(column_name, gson.toJson(rs.getFloat(column_name)));
+                    obj.addProperty(column_name, rs.getFloat(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.INTEGER){
-                    obj.addProperty(column_name, gson.toJson(rs.getInt(column_name)));
+                    obj.addProperty(column_name, rs.getInt(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.NVARCHAR){
-                    obj.addProperty(column_name, gson.toJson(rs.getNString(column_name)));
+                    obj.addProperty(column_name, rs.getNString(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.VARCHAR){
-                    obj.addProperty(column_name, gson.toJson(rs.getString(column_name)));
+                    obj.addProperty(column_name, rs.getString(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.TINYINT){
-                    obj.addProperty(column_name, gson.toJson(rs.getInt(column_name)));
+                    obj.addProperty(column_name, rs.getInt(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.SMALLINT){
-                    obj.addProperty(column_name, gson.toJson(rs.getInt(column_name)));
+                    obj.addProperty(column_name, rs.getInt(column_name));
                 }
                 else if(rsmd.getColumnType(i)==java.sql.Types.DATE){
                     obj.addProperty(column_name, gson.toJson(rs.getDate(column_name)));
@@ -70,8 +69,7 @@ class ResultSetConverter {
                     obj.addProperty(column_name, gson.toJson(rs.getTimestamp(column_name)));
                 }
                 else{
-                    obj.addProperty(column_name, gson.toJson(rs.getObject
-                            (column_name)));
+                    obj.addProperty(column_name, rs.getString(column_name));
                 }
             }
 
@@ -87,8 +85,8 @@ public class MyBean {
     private static final Logger logger = Logger.getLogger(MyBean.class.getName
             ());
 
-    private String json;
-    private String string_extra;
+    private String json = "";
+    private String string_extra = "";
 
     public String getResultsSetData() {
         logger.info("Calling getResultsSetData method");

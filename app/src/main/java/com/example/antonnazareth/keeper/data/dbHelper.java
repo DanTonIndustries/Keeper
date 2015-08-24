@@ -31,14 +31,17 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Manages a local database for weather data.
  */
 public class dbHelper extends SQLiteOpenHelper {
+    private static final Logger logger = Logger.getLogger(dbHelper.class
+            .getName());
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "keeper.db";
 
     private static MyApi myApiService = null;
@@ -49,6 +52,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        logger.info("onCreate");
         // Create a table to hold locations.  A location consists of the string supplied in the
         // location setting, the city name, and the latitude and longitude
         final String SQL_CREATE_USER_TABLE = "CREATE TABLE " + KeeperContract.UserEntry.TABLE_NAME + " (" +
@@ -64,31 +68,15 @@ public class dbHelper extends SQLiteOpenHelper {
                 KeeperContract.TeamEntry.COLUMN_TEAM_NAME + " TEXT UNIQUE NOT NULL " +
                 " );";
 
-
-//        final String SQL_CREATE_TEAM2USER_TABLE = "CREATE TABLE " + Team2UserEntry.TABLE_NAME + " (" +
-//
-//                KeeperContract.Team2UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//
-//                // the ID of the location entry associated with this weather data
-//                KeeperContract.TeamEntry.COLUMN_TEAM_NAME + " TEXT UNIQUE NOT NULL, " +
-//
-//                // Set up the location column as a foreign key to location table.
-//                " FOREIGN KEY (" + KeeperContract.Team2UserEntry.COLUMN_USER_KEY + ") REFERENCES " +
-//                KeeperContract.UserEntry.TABLE_NAME + " (" + KeeperContract.UserEntry.COLUMN_USER_ID + "), " +
-//
-//                " FOREIGN KEY (" + KeeperContract.Team2UserEntry.COLUMN_TEAM_KEY + ") REFERENCES " +
-//                KeeperContract.TeamEntry.TABLE_NAME + " (" + KeeperContract.TeamEntry.COLUMN_TEAM_ID +
-//                " );";
-
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_TEAM_TABLE);
-//        sqLiteDatabase.execSQL(SQL_CREATE_TEAM2USER_TABLE);
-
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        logger.info("onUpgrade");
+
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         // Note that this only fires if you change the version number for your database.
@@ -97,7 +85,6 @@ public class dbHelper extends SQLiteOpenHelper {
         // should be your top priority before modifying this method.
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.UserEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.TeamEntry.TABLE_NAME);
-        //sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Team2UserEntry.TABLE_NAME);
 
         onCreate(sqLiteDatabase);
     }
