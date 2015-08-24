@@ -56,6 +56,8 @@ public class MatchActivity extends ActionBarActivity {
         EditText editText = (EditText) findViewById(R.id.scoreText2);
         editText.setRawInputType(2);
 
+        EditText editText2 = (EditText) findViewById(R.id.scoreText1);
+        editText2.setRawInputType(2);
 
         Button enterScoreButton = (Button) findViewById(R.id.button9);
         enterScoreButton.setTypeface(font);

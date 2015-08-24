@@ -20,6 +20,23 @@ public class PlayActivity extends ActionBarActivity {
         setContentView(R.layout.activity_play);
         Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
+
+
+        final Button singleUserScoringButton = (Button) findViewById(R.id.singleUserScoring);
+        singleUserScoringButton.setTypeface(font);
+
+        singleUserScoringButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tag = singleUserScoringButton.getTag().toString();
+                Intent launchSettingsIntent = new Intent(view.getContext(), SingleUserMatchActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, tag);
+
+                startActivity(launchSettingsIntent);
+            }
+        });
+
+
         final Button foozButton = (Button) findViewById(R.id.button5);
         foozButton.setTypeface(font);
 

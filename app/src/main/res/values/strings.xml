@@ -27,5 +27,6 @@
     <string name="title_activity_select_team">SelectTeamActivity</string>
     <string name="title_activity_select_user">selectUserActivity</string>
     <string name="title_activity_user_team_view">UserTeamViewActivity</string>
+    <string name="title_activity_single_user_match">SingleUserMatchActivity</string>
 
 </resources>

@@ -99,6 +99,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.antonnazareth.keeper.MainActivity" />
         </activity>
+        <activity
+            android:name=".SingleUserMatchActivity"
+            android:label="@string/title_activity_single_user_match"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.antonnazareth.keeper.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
