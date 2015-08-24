@@ -459,7 +459,7 @@ public class MyEndpoint {
     }
 
     @ApiMethod(name = "getGames", path="query/game")
-    public MyBean getGames() {
+         public MyBean getGames() {
         logger.info("Calling getGames method");
         MyBean bean = new MyBean();
 
@@ -480,8 +480,52 @@ public class MyEndpoint {
         return bean;
     }
 
+    @ApiMethod(name = "getScores", path="query/score")
+    public MyBean getScores() {
+        logger.info("Calling getScores method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT s.* FROM scores s;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
     @ApiMethod(name = "getTeamUsers", path="query/teamUser")
-    public MyBean getTeamUsers(@Named("teamid") int teamid) {
+    public MyBean getTeamUsers() {
+        logger.info("Calling getTeamScores method");
+        MyBean bean = new MyBean();
+
+        String response = "";
+
+        try {
+            Connection conn = getConn();
+
+            String stmt = "SELECT tu.* FROM teamusers tu;";
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            bean = runStmt(conn, ps);
+
+        } catch (SQLException e){
+            response = e.getLocalizedMessage() + ", ";
+        }
+
+        bean.addToStringData(response);
+        return bean;
+    }
+
+    @ApiMethod(name = "getTeamUsersByTeam", path="query/teamUsersByTeam")
+    public MyBean getTeamUsersByTeam(@Named("teamid") int teamid) {
         logger.info("Calling getTeamScores method");
         MyBean bean = new MyBean();
 

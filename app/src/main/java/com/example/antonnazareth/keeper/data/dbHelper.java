@@ -41,7 +41,7 @@ public class dbHelper extends SQLiteOpenHelper {
             .getName());
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "keeper.db";
 
     private static MyApi myApiService = null;
@@ -63,14 +63,56 @@ public class dbHelper extends SQLiteOpenHelper {
                 " );";
 
         final String SQL_CREATE_TEAM_TABLE = "CREATE TABLE " + KeeperContract.TeamEntry.TABLE_NAME + " (" +
-
                 KeeperContract.TeamEntry.COLUMN_TEAM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 KeeperContract.TeamEntry.COLUMN_TEAM_NAME + " TEXT UNIQUE NOT NULL " +
                 " );";
 
+        final String SQL_CREATE_TEAMUSER_TABLE = "CREATE TABLE " + KeeperContract.TeamUserEntry.TABLE_NAME + " (" +
+                KeeperContract.TeamUserEntry.COLUMN_TEAM_ID + " INTEGER NOT NULL, " +
+                KeeperContract.TeamUserEntry.COLUMN_USER_ID + " INTEGER NOT NULL, " +
+                "PRIMARY KEY(" +
+                KeeperContract.TeamUserEntry.COLUMN_TEAM_ID + ", " +
+                KeeperContract.TeamUserEntry.COLUMN_USER_ID + "), " +
+                "FOREIGN KEY (" + KeeperContract.TeamUserEntry.COLUMN_TEAM_ID + ") " +
+                "REFERENCES " + KeeperContract.TeamEntry.TABLE_NAME + "(" +
+                KeeperContract.TeamEntry.COLUMN_TEAM_ID + "), " +
+                "FOREIGN KEY (" + KeeperContract.TeamUserEntry.COLUMN_USER_ID + ") " +
+                "REFERENCES " + KeeperContract.UserEntry.TABLE_NAME + "(" +
+                KeeperContract.UserEntry.COLUMN_USER_ID + "));";
+
+        final String SQL_CREATE_GAME_TABLE = "CREATE TABLE " + KeeperContract.GameEntry.TABLE_NAME + " (" +
+                KeeperContract.GameEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KeeperContract.GameEntry.COLUMN_GAME_NAME + " TEXT UNIQUE NOT NULL " +
+                " );";
+
+        final String SQL_CREATE_MATCH_TABLE = "CREATE TABLE " + KeeperContract.MatchEntry.TABLE_NAME + " (" +
+                KeeperContract.MatchEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KeeperContract.MatchEntry.COLUMN_GAME_ID + " INTEGER NOT NULL, " +
+                "FOREIGN KEY (" + KeeperContract.MatchEntry.COLUMN_GAME_ID + ") " +
+                "REFERENCES " + KeeperContract.GameEntry.TABLE_NAME + "(" +
+                KeeperContract.GameEntry.COLUMN_ID + "));";
+
+        final String SQL_CREATE_SCORE_TABLE = "CREATE TABLE " + KeeperContract
+                .ScoreEntry.TABLE_NAME + " (" +
+                KeeperContract.ScoreEntry.COLUMN_MATCH_ID + " INTEGER NOT NULL, " +
+                KeeperContract.ScoreEntry.COLUMN_TEAM_ID + " INTEGER NOT NULL, " +
+                KeeperContract.ScoreEntry.COLUMN_SCORE + " INTEGER NOT NULL, " +
+                "PRIMARY KEY(" +
+                KeeperContract.ScoreEntry.COLUMN_TEAM_ID + ", " +
+                KeeperContract.ScoreEntry.COLUMN_MATCH_ID + "), " +
+                "FOREIGN KEY (" + KeeperContract.ScoreEntry.COLUMN_TEAM_ID + ") " +
+                "REFERENCES " + KeeperContract.TeamEntry.TABLE_NAME + "(" +
+                KeeperContract.TeamEntry.COLUMN_TEAM_ID + "), " +
+                "FOREIGN KEY (" + KeeperContract.ScoreEntry.COLUMN_MATCH_ID + ") " +
+                "REFERENCES " + KeeperContract.MatchEntry.TABLE_NAME + "(" +
+                KeeperContract.MatchEntry.COLUMN_ID + "));";
+
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_TEAM_TABLE);
-
+        sqLiteDatabase.execSQL(SQL_CREATE_TEAMUSER_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_GAME_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_MATCH_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_SCORE_TABLE);
     }
 
     @Override
@@ -85,7 +127,10 @@ public class dbHelper extends SQLiteOpenHelper {
         // should be your top priority before modifying this method.
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.UserEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.TeamEntry.TABLE_NAME);
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.TeamUserEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.GameEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.MatchEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KeeperContract.ScoreEntry.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 

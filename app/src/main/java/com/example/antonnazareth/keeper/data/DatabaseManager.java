@@ -5,8 +5,12 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.antonnazareth.keeper.data.AsyncTasks.UpdateLocalTeamUsersAsync;
 import com.example.antonnazareth.keeper.data.AsyncTasks.UpdateLocalUsersAsync;
 import com.example.antonnazareth.keeper.data.AsyncTasks.UpdateLocalTeamsAsync;
+import com.example.antonnazareth.keeper.data.AsyncTasks.UpdateLocalGamesAsync;
+import com.example.antonnazareth.keeper.data.AsyncTasks.UpdateLocalMatchesAsync;
+import com.example.antonnazareth.keeper.data.AsyncTasks.UpdateLocalScoresAsync;
 
 import java.util.logging.Logger;
 
@@ -78,6 +82,16 @@ public class DatabaseManager {
             updateusers.execute();
             UpdateLocalTeamsAsync updateteams = new UpdateLocalTeamsAsync();
             updateteams.execute();
+            UpdateLocalTeamUsersAsync updateTeamUsers = new
+                    UpdateLocalTeamUsersAsync();
+            updateTeamUsers.execute();
+            UpdateLocalGamesAsync updateGames = new UpdateLocalGamesAsync();
+            updateGames.execute();
+            UpdateLocalMatchesAsync updateMatches = new
+                    UpdateLocalMatchesAsync();
+            updateMatches.execute();
+            UpdateLocalScoresAsync updateScores = new UpdateLocalScoresAsync();
+            updateScores.execute();
         }
     }
 

@@ -2,109 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client-android\1.19.0\ba2aafb867f6af469f936ae76426cf0a280094bd\google-api-client-android-1.19.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ba2aafb867f6af469f936ae76426cf0a280094bd">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\google-api-client-android-1.19.0-7c227853b6a239687661f7fb5d2c57a7dd83aa4f.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-android\1.19.0\e3f11020c2c812112803d252d1392872d3f619c8\google-http-client-android-1.19.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e3f11020c2c812112803d252d1392872d3f619c8">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\google-http-client-android-1.19.0-bbb9aac6a8170dbc8e0e8aa5818dc77284388dc5.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.guava\guava-jdk5\13.0\381ae6c8add7c98e9bcddb1e0b898400cd6fc3f7\guava-jdk5-13.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="381ae6c8add7c98e9bcddb1e0b898400cd6fc3f7">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\guava-jdk5-13.0-c39a04d81c05df463557673a9ba9c183139af47d.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\classes-b0a1b59c363a45d8e2c6254c3cc91f61ae3ed681.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\AndroidStudioProjects\Keeper\app\libs\gson-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\gson-2.3.1-c93269d2b5852466942dd655e5e9871a6b205c12.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client\1.19.0\6a21277d9bebe267b7ddee028b241eebc756c040\google-api-client-1.19.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6a21277d9bebe267b7ddee028b241eebc756c040">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\google-api-client-1.19.0-bdfcb9645d1ddd0beeaaa1b25a1f8378274a17c0.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\1.3.9\40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf\jsr305-1.3.9.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\jsr305-1.3.9-9a0dfb3a02ef1b0faa4944852e3a61b194be0782.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-80639275a03d73d8c239e67bebbc0ffba4d64a2e.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client\1.19.0\cdca49ad0977c040f603478aa2e16b2775c8fec6\google-http-client-1.19.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="cdca49ad0977c040f603478aa2e16b2775c8fec6">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\google-http-client-1.19.0-42f2d4f0bed0180877c91081290c6e7d6e900be1.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\classes-45d95be0fec30679ecddbd3a2d04b5c8577d38da.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.1.3\f6c3aed1cdfa21b5c1737c915186ea93a95a58bd\jackson-core-2.1.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f6c3aed1cdfa21b5c1737c915186ea93a95a58bd">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\jackson-core-2.1.3-3ce8c2a54cf69637fd7db25c41c669b4c56a9cef.jar" />
-    </item>
-    <item
         jar="C:\Users\admin\AndroidStudioProjects\Keeper\backend\build\libs\backend-android-endpoints.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="99aabb5585bdbdb29956087da03169a7c8ac62a9">
+        sha1="4f0d03c1efd220c3abc10882268da117865e8873">
         <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\backend-android-endpoints-e85febea912e939570ace80125c63b23c110465d.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-jackson2\1.19.0\81dbf9795d387d5e80e55346582d5f2fb81a42eb\google-http-client-jackson2-1.19.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81dbf9795d387d5e80e55346582d5f2fb81a42eb">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\google-http-client-jackson2-1.19.0-84860675e2ee2b3fa63ee3fdc024a890f45ee2d1.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\.gradle\caches\modules-2\files-2.1\com.google.oauth-client\google-oauth-client\1.19.0\d473a8962e14a707a3716637e4898bb2dd9643f2\google-oauth-client-1.19.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d473a8962e14a707a3716637e4898bb2dd9643f2">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\google-oauth-client-1.19.0-0777a540a6f2dbdbe7212ff721494e907d12e88f.jar" />
-    </item>
-    <item
-        jar="C:\Users\admin\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-cd4aaa78a796c04c90bcb77403e493cf0b47d62f.jar" />
     </item>
 
 </items>

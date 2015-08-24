@@ -77,6 +77,82 @@ public class KeeperContract {
         }
     }
 
+    public static final class TeamUserEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_TEAMS).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+
+        public static final String TABLE_NAME = "teamuser";
+        public static final String COLUMN_TEAM_ID = "teamid";
+        public static final String COLUMN_USER_ID = "userid";
+
+        public static Uri buildTeamUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    public static final class GameEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_TEAMS).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+
+        public static final String TABLE_NAME = "game";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_GAME_NAME = "name";
+
+        public static Uri buildTeamUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    public static final class MatchEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_TEAMS).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+
+        public static final String TABLE_NAME = "match";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_GAME_ID = "gameid";
+
+        public static Uri buildTeamUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    public static final class ScoreEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_TEAMS).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEAMS;
+
+        public static final String TABLE_NAME = "score";
+        public static final String COLUMN_MATCH_ID = "matchid";
+        public static final String COLUMN_TEAM_ID = "teamid";
+        public static final String COLUMN_SCORE = "score";
+
+        public static Uri buildTeamUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
 //    public static final class Team2UserEntry implements BaseColumns {
 //
 //        public static final Uri CONTENT_URI =
