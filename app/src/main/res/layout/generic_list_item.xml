@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:paddingTop="@dimen/activity_tiny_margin"
     android:paddingBottom="@dimen/activity_tiny_margin"
-    android:descendantFocusability="blocksDescendants" >
+    android:descendantFocusability="blocksDescendants">
 
     <ImageView
         android:id="@+id/imageView1"

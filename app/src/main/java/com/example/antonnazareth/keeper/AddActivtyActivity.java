@@ -30,7 +30,7 @@ public class AddActivtyActivity extends ActionBarActivity {
 
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.no_of_players_array,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.activity_multi_array,
 //        android.R.layout.simple_spinner_item);
                 R.layout.my_spinner_textview);
 //    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

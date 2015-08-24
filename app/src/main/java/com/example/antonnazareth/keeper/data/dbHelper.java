@@ -55,20 +55,17 @@ public class dbHelper extends SQLiteOpenHelper {
                 " );";
 
 
-//        final String SQL_CREATE_TEAM2USER_TABLE = "CREATE TABLE " + Team2UserEntry.TABLE_NAME + " (" +
-//
-//                KeeperContract.Team2UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//
-//                // the ID of the location entry associated with this weather data
-//                KeeperContract.TeamEntry.COLUMN_TEAM_NAME + " TEXT UNIQUE NOT NULL, " +
-//
-//                // Set up the location column as a foreign key to location table.
-//                " FOREIGN KEY (" + KeeperContract.Team2UserEntry.COLUMN_USER_KEY + ") REFERENCES " +
-//                KeeperContract.UserEntry.TABLE_NAME + " (" + KeeperContract.UserEntry.COLUMN_USER_ID + "), " +
-//
-//                " FOREIGN KEY (" + KeeperContract.Team2UserEntry.COLUMN_TEAM_KEY + ") REFERENCES " +
-//                KeeperContract.TeamEntry.TABLE_NAME + " (" + KeeperContract.TeamEntry.COLUMN_TEAM_ID +
-//                " );";
+        final String SQL_CREATE_TEAM2USER_TABLE = "CREATE TABLE " + KeeperContract.Team2UserEntry.TABLE_NAME + " (" +
+
+                KeeperContract.Team2UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+
+                // Set up the location column as a foreign key to location table.
+                " FOREIGN KEY (" + KeeperContract.Team2UserEntry.COLUMN_USER_KEY + ") REFERENCES " +
+                KeeperContract.UserEntry.TABLE_NAME + " (" + KeeperContract.UserEntry.COLUMN_USER_ID + "), " +
+
+                " FOREIGN KEY (" + KeeperContract.Team2UserEntry.COLUMN_TEAM_KEY + ") REFERENCES " +
+                KeeperContract.TeamEntry.TABLE_NAME + " (" + KeeperContract.TeamEntry.COLUMN_TEAM_ID +
+                " );";
 
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_TEAM_TABLE);
@@ -92,3 +89,12 @@ public class dbHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 }
+
+//CREATE TABLE teamusers (
+//        teamid INT NOT NULL,
+//        userid INT NOT NULL,
+//        PRIMARY KEY(teamid, userid),
+//    INDEX (teamid),
+//    INDEX (userid),
+//    FOREIGN KEY (teamid) REFERENCES teams(id),
+//        FOREIGN KEY (userid) REFERENCES users(id)) ENGINE=INNODB;

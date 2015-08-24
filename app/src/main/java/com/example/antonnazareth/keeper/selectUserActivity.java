@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
@@ -34,6 +35,9 @@ public class selectUserActivity extends ActionBarActivity {
         setContentView(R.layout.activity_select_user);
 
         Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
+        TextView existingUsersView = (TextView) findViewById(R.id.existingUsers);
+        existingUsersView.setTypeface(font);
 
         Button addUser = (Button) findViewById(R.id.addUserFromSelect);
         addUser.setTypeface(font);

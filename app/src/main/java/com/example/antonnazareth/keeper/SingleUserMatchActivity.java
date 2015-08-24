@@ -90,7 +90,7 @@ public class SingleUserMatchActivity extends AppCompatActivity {
     public void addOneToScore(int plusButtonId) {
         //Button button = (Button) findViewById(plusButtonId);
         //String name = button.getTag().toString();
-        EditText scoreEditText = (EditText) findViewById(R.id.scoreText1);
+        EditText scoreEditText = (EditText) findViewById(R.id.userScoreText1);
         String scoreText = scoreEditText.getText().toString();
         Integer score = Integer.valueOf(scoreText);
         Integer newScore = score + 1;
@@ -99,7 +99,7 @@ public class SingleUserMatchActivity extends AppCompatActivity {
     }
 
     public void subtractOneFromScore(int minusButton1) {
-        EditText scoreEditText = (EditText) findViewById(R.id.scoreText1);
+        EditText scoreEditText = (EditText) findViewById(R.id.userScoreText1);
         String scoreText = scoreEditText.getText().toString();
         Integer score = Integer.valueOf(scoreText);
         Integer newScore = score - 1;

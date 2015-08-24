@@ -46,6 +46,7 @@
         <activity
             android:name=".MatchActivity"
             android:label="@string/title_activity_match"
+            android:theme="@style/MainActFullTheme"
             android:parentActivityName=".GameActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

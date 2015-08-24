@@ -28,7 +28,7 @@
     <style name="alt_button" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/alt_button_selector</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>

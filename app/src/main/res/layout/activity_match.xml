@@ -9,206 +9,228 @@
 
     tools:context="com.example.antonnazareth.keeper.MatchActivity">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activityChoiceTextView"
+        android:background="#474747"
+        android:text="FOOZ"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0.05"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_weight="0.75">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1">
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_weight="1">
 
-            <Button
-                android:id="@+id/selectTeam1Button"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="SELECT TEAM 1"
-                android:tag="1"
-                android:layout_weight="1"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:layout_weight="0.1"/>
-
-            <TextView
-                android:id="@+id/team1Text"
-                android:text="Team 1"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_weight="0.1"/>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/selectTeam2Button"
+            android:orientation="horizontal"
+            android:gravity="top"
+            android:layout_weight="0.5">
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="SELECT TEAM 2"
-                android:tag="2"
-                android:layout_weight="1"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:layout_weight="0.1"/>
-
-            <TextView
-                android:id="@+id/team2Text"
-                android:text="Team 2"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
-                 />
-        </LinearLayout>
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_weight="1.5">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/scoreText1"
-                android:text="0"
-                android:textSize="40dp"
-                android:fontFamily="sans-serif-light"
-                android:singleLine="true"
-                android:gravity="top"
-                android:imeOptions="actionDone"
-                android:layout_weight="0.15"
-                android:selectAllOnFocus="true"
-                android:tag="1" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_weight="1">
 
                 <Button
-                    android:id="@+id/minusButton1"
+                    android:id="@+id/selectTeam1Button"
                     android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:text="-"
+                    android:layout_width="match_parent"
+                    android:text="SELECT TEAM 1"
                     android:tag="1"
                     android:layout_weight="1"/>
 
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.05">
-                </View>
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_weight="0.1"/>
 
-                <Button
-                    android:id="@+id/plusButton1"
+                <TextView
+                    android:id="@+id/team1Text"
+                    android:text="Team 1"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:text="+"
-                    android:tag="1"
-                    android:layout_weight="1"/>
-
+                    android:layout_weight="1"
+                    android:gravity="center" />
             </LinearLayout>
-        </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_weight="0.1"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/scoreText2"
-
-                android:text="0"
-                android:fontFamily="sans-serif-light"
-                android:tag="2"
-                android:imeOptions="actionDone"
-                android:singleLine="true"
-                android:textSize="40dp"
-                android:gravity="top"
-                android:layout_weight="0.15"
-                android:selectAllOnFocus="true"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_weight="0.1"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:gravity="center">
 
                 <Button
-                    android:id="@+id/minusButton2"
+                    android:id="@+id/selectTeam2Button"
                     android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:text="-"
+                    android:layout_width="match_parent"
+                    android:text="SELECT TEAM 2"
                     android:tag="2"
                     android:layout_weight="1"/>
 
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.05">
-                </View>
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_weight="0.1"/>
 
-                <Button
-                    android:id="@+id/plusButton2"
+                <TextView
+                    android:id="@+id/team2Text"
+                    android:text="Team 2"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:text="+"
-                    android:tag="2"
-                    android:layout_weight="1"/>
-
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    />
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1.5">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scoreText1"
+                    android:text="0"
+                    android:textSize="40dp"
+                    android:fontFamily="sans-serif-light"
+                    android:singleLine="true"
+                    android:gravity="top"
+                    android:imeOptions="actionDone"
+                    android:layout_weight="0.15"
+                    android:selectAllOnFocus="true"
+                    android:tag="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/minusButton1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:text="-"
+                        android:tag="1"
+                        android:layout_weight="1"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.05">
+                    </View>
+
+                    <Button
+                        android:id="@+id/plusButton1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:text="+"
+                        android:tag="1"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_weight="0.1"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scoreText2"
+
+                    android:text="0"
+                    android:fontFamily="sans-serif-light"
+                    android:tag="2"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:textSize="40dp"
+                    android:gravity="top"
+                    android:layout_weight="0.15"
+                    android:selectAllOnFocus="true"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/minusButton2"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:text="-"
+                        android:tag="2"
+                        android:layout_weight="1"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.05">
+                    </View>
+
+                    <Button
+                        android:id="@+id/plusButton2"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:text="+"
+                        android:tag="2"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
         <Button
             android:id="@+id/button9"
             android:layout_height="wrap_content"

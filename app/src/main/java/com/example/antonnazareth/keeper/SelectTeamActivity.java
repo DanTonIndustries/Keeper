@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.antonnazareth.keeper.data.KeeperContract;
@@ -36,7 +37,8 @@ public class SelectTeamActivity extends ActionBarActivity {
 
         Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
-
+        TextView existingTeamView = (TextView) findViewById(R.id.existingTeam);
+        existingTeamView.setTypeface(font);
 
         ListView listView = (ListView) findViewById(R.id.list_view_teams);
         String[] values = new String[] {"jat"};

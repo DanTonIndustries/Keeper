@@ -9,13 +9,20 @@
 
     tools:context="com.example.antonnazareth.keeper.SelectTeam">
 
- <!--   <TextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select From Existing Teams"
+        android:id="@+id/existingTeam"
+        android:background="#474747"
+        android:text="EXISTING TEAMS"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:background="#c8c8ff"
-        android:layout_weight="0.1"/>-->
+        android:layout_weight="0.03"/>
+
     <ListView
         android:id="@+id/list_view_teams"
         android:layout_width="match_parent"

@@ -32,7 +32,6 @@ public class KeeperContract {
     public static final String TEAMS_2_USER = "team2user";
 
 
-
     /* Inner class that defines the table contents of the location table */
     public static final class UserEntry implements BaseColumns {
 
@@ -78,23 +77,25 @@ public class KeeperContract {
         }
     }
 
-//    public static final class Team2UserEntry implements BaseColumns {
-//
-//        public static final Uri CONTENT_URI =
-//                BASE_CONTENT_URI.buildUpon().appendPath(TEAMS_2_USER).build();
-//
-//        public static final String CONTENT_TYPE =
-//                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + TEAMS_2_USER;
-//        public static final String CONTENT_ITEM_TYPE =
-//                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + TEAMS_2_USER;
-//
-//        public static final String TABLE_NAME = "team2user";
-//        public static final String COLUMN_TEAM_KEY = "team_id";
-//        public static final String COLUMN_USER_KEY = "user_id";
-//
-//        public static Uri buildTeam2UserUri(long id) {
-//            return ContentUris.withAppendedId(CONTENT_URI, id);
-//        }
+    public static final class Team2UserEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(TEAMS_2_USER).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + TEAMS_2_USER;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + TEAMS_2_USER;
+
+        public static final String TABLE_NAME = "team2user";
+        public static final String COLUMN_TEAM_KEY = "team_id";
+        public static final String COLUMN_USER_KEY = "user_id";
+
+        public static Uri buildTeam2UserUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+}
 //        /*
 //            Student: This is the buildWeatherLocation function you filled in.
 //         */
@@ -115,4 +116,4 @@ public class KeeperContract {
 //        }
 //
 //    }
-}
+//}

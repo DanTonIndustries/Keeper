@@ -37,7 +37,7 @@ public class PlayActivity extends ActionBarActivity {
         });
 
 
-        final Button foozButton = (Button) findViewById(R.id.button5);
+        final Button foozButton = (Button) findViewById(R.id.teamScoring);
         foozButton.setTypeface(font);
 
         foozButton.setOnClickListener(new View.OnClickListener() {
@@ -51,18 +51,18 @@ public class PlayActivity extends ActionBarActivity {
             }
         });
 
-        final Button genericButton = (Button) findViewById(R.id.button6);
-        genericButton.setTypeface(font);
-
-        genericButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String genTag = genericButton.getTag().toString();
-                Intent launchSettingsIntent = new Intent(view.getContext(), MatchActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, genTag);
-                startActivity(launchSettingsIntent);
-            }
-        });
+//        final Button genericButton = (Button) findViewById(R.id.button6);
+//        genericButton.setTypeface(font);
+//
+//        genericButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String genTag = genericButton.getTag().toString();
+//                Intent launchSettingsIntent = new Intent(view.getContext(), MatchActivity.class)
+//                        .putExtra(Intent.EXTRA_TEXT, genTag);
+//                startActivity(launchSettingsIntent);
+//            }
+//        });
     }
 
     @Override
