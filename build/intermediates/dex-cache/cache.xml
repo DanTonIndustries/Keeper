@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\admin\AndroidStudioProjects\Keeper\backend\build\libs\backend-android-endpoints.jar"
+        jar="/Users/antonnazareth/AndroidStudioProjects/Keeper/backend/build/libs/backend-android-endpoints.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="4f0d03c1efd220c3abc10882268da117865e8873">
-        <dex dex="C:\Users\admin\AndroidStudioProjects\Keeper\app\build\intermediates\pre-dexed\debug\backend-android-endpoints-e85febea912e939570ace80125c63b23c110465d.jar" />
+        sha1="efb04b95809c6101d6fcc92d7638faa0b711e8ec">
+        <dex dex="/Users/antonnazareth/AndroidStudioProjects/Keeper/app/build/intermediates/pre-dexed/debug/backend-android-endpoints-dc66c41aa2407a3ada6cfe1c48a4981e4f53cc94.jar" />
     </item>
 
 </items>
