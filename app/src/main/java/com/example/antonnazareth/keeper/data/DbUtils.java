@@ -29,6 +29,33 @@ public class DbUtils {
         return rowId;
     }
 
+    public static int removeUser(int id){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        int rowsDeleted = database.delete(KeeperContract.UserEntry.TABLE_NAME,
+                KeeperContract.UserEntry.COLUMN_USER_ID + " = ?",
+                new String[] {String.valueOf(id)});
+
+        DatabaseManager.getInstance().closeDatabase();
+        return rowsDeleted;
+    }
+
+    public static Cursor getAllUsers(){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.UserEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                null,// "where" clause
+                null, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
+    }
+
     public static long addTeam(String teamname){
 
         SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
@@ -44,6 +71,33 @@ public class DbUtils {
         DatabaseManager.getInstance().closeDatabase();
 
         return rowId;
+    }
+
+    public static int removeTeam(int id){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        int rowsDeleted = database.delete(KeeperContract.TeamEntry.TABLE_NAME,
+                KeeperContract.TeamEntry.COLUMN_TEAM_ID + " = ?",
+                new String[] {String.valueOf(id)});
+
+        DatabaseManager.getInstance().closeDatabase();
+        return rowsDeleted;
+    }
+
+    public static Cursor getAllTeams(){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.TeamEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                null,// "where" clause
+                null, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
     }
 
     public static long addGame(String gamename){
@@ -63,6 +117,33 @@ public class DbUtils {
         return rowId;
     }
 
+    public static int removeGame(int id){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        int rowsDeleted = database.delete(KeeperContract.GameEntry.TABLE_NAME,
+                KeeperContract.GameEntry.COLUMN_ID + " = ?",
+                new String[] {String.valueOf(id)});
+
+        DatabaseManager.getInstance().closeDatabase();
+        return rowsDeleted;
+    }
+
+    public static Cursor getAllGames(){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.GameEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                null,// "where" clause
+                null, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
+    }
+
     public static long addMatch(int gameid){
 
         SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
@@ -78,6 +159,33 @@ public class DbUtils {
         DatabaseManager.getInstance().closeDatabase();
 
         return rowId;
+    }
+
+    public static int removeMatch(int id){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        int rowsDeleted = database.delete(KeeperContract.MatchEntry.TABLE_NAME,
+                KeeperContract.MatchEntry.COLUMN_ID + " = ?",
+                new String[] {String.valueOf(id)});
+
+        DatabaseManager.getInstance().closeDatabase();
+        return rowsDeleted;
+    }
+
+    public static Cursor getAllMatches(){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.MatchEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                null,// "where" clause
+                null, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
     }
 
     public static long addTeamUser(int teamid, int userid){
@@ -98,6 +206,38 @@ public class DbUtils {
         return rowId;
     }
 
+    public static Cursor getTeamUserByTeamId(int teamid){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.TeamUserEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                KeeperContract.TeamUserEntry.COLUMN_TEAM_ID + " = ?",// "where"
+                new String[] {String.valueOf(teamid)}, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
+    }
+
+    public static Cursor getTeamUserByUserId(int userid){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.TeamUserEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                KeeperContract.TeamUserEntry.COLUMN_USER_ID + " = ?",// "where"
+                new String[] {String.valueOf(userid)}, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
+    }
+
     public static long addScore(int matchid, int teamid, int score){
 
         SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
@@ -115,6 +255,38 @@ public class DbUtils {
         DatabaseManager.getInstance().closeDatabase();
 
         return rowId;
+    }
+
+    public static Cursor getScoresByMatchId(int matchid){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.ScoreEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                KeeperContract.ScoreEntry.COLUMN_MATCH_ID + " = ?",// "where"
+                new String[] {String.valueOf(matchid)}, // Where values
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
+    }
+
+    public static Cursor getScoresByTeamId(int teamid){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.ScoreEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                KeeperContract.ScoreEntry.COLUMN_TEAM_ID + " = ?",// "where"
+                new String[] {String.valueOf(teamid)}, // Where values
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
     }
 
     public static void addMatchResult(int gameid, int team1id, int team1score,
@@ -146,11 +318,12 @@ public class DbUtils {
                 (KeeperContract.MatchEntry.COLUMN_ID));
         cursor.close();
 
+        DatabaseManager.getInstance().closeDatabase();
+
         // Now add the scores.
         addScore(matchid, team1id, team1score);
         addScore(matchid, team2id, team2score);
 
-        DatabaseManager.getInstance().closeDatabase();
     }
 
     public static void addMatchResult(String gameName, int team1id, int team1score,
@@ -187,6 +360,8 @@ public class DbUtils {
 
             gameid = (int) longgameid;
         }
+        DatabaseManager.getInstance().closeDatabase();
+
         //TODO: Swap id's to LONG in schema...
         // Now add the match result!
         addMatchResult(gameid, team1id, team1score, team2id, team2score);

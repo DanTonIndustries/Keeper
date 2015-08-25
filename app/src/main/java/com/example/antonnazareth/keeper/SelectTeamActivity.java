@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -17,8 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.antonnazareth.keeper.data.DbUtils;
 import com.example.antonnazareth.keeper.data.KeeperContract;
-import com.example.antonnazareth.keeper.data.dbHelper;
 
 import java.util.ArrayList;
 
@@ -158,18 +157,8 @@ public class SelectTeamActivity extends ActionBarActivity {
         //mTeamAdapter.clear();
         mTeamAdapt.clearData();
 
-        dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
-        SQLiteDatabase db = tDbHelper.getReadableDatabase(); //needs to BE DONE ON ASYNCTASK!!!
         // A cursor is your primary interface to the query results.
-        Cursor cursor = db.query(
-                KeeperContract.TeamEntry.TABLE_NAME,  // Table to Query
-                null, // all columns
-                null, // Columns for the "where" clause
-                null, // Values for the "where" clause
-                null, // columns to group by
-                null, // columns to filter by row groups
-                null // sort order
-        );
+        Cursor cursor = DbUtils.getAllTeams();
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -180,7 +169,6 @@ public class SelectTeamActivity extends ActionBarActivity {
             cursor.moveToNext();
         }
 
-        db.close();
 
         mTeamAdapt.notifyDataSetChanged();
 

@@ -1,11 +1,9 @@
 package com.example.antonnazareth.keeper;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -20,7 +18,6 @@ import android.widget.TextView;
 
 import com.example.antonnazareth.keeper.data.DbUtils;
 import com.example.antonnazareth.keeper.data.KeeperContract;
-import com.example.antonnazareth.keeper.data.dbHelper;
 
 import java.util.ArrayList;
 
@@ -54,13 +51,7 @@ public class AddTeam extends ActionBarActivity {
         mTeamUsersAdapter = new CustomAdapter(this, arrayList, R.drawable
                 .clouds);
 
-        //TODO: Query for getting users of team.
-
         //TODO: Mega query for scores.
-
-        //TODO: Function for removing from db.
-
-        //TODO: Function for adding to db.
 
         //TODO: Leaderboard query, filterable by activity.
         //TODO: For users and teams.
@@ -183,18 +174,8 @@ public class AddTeam extends ActionBarActivity {
 
         mTeamUsersAdapter.clearData();
 
-        dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
-        SQLiteDatabase db = tDbHelper.getReadableDatabase(); //needs to BE DONE ON ASYNCTASK!!!
         // A cursor is your primary interface to the query results.
-        Cursor cursor = db.query(
-                KeeperContract.TeamEntry.TABLE_NAME,  // Table to Query
-                null, // all columns
-                null, // Columns for the "where" clause
-                null, // Values for the "where" clause
-                null, // columns to group by
-                null, // columns to filter by row groups
-                null // sort order
-        );
+        Cursor cursor = DbUtils.getAllTeams();
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -204,8 +185,5 @@ public class AddTeam extends ActionBarActivity {
             updateTeamList(teamName);
             cursor.moveToNext();
         }
-
-        db.close();
-
     }
 }
