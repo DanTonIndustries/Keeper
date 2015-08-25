@@ -1,20 +1,15 @@
 package com.example.antonnazareth.keeper;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.antonnazareth.keeper.data.KeeperContract;
-import com.example.antonnazareth.keeper.data.dbHelper;
+import com.example.antonnazareth.keeper.data.DatabaseManager;
 
 import java.util.logging.Logger;
 
@@ -28,9 +23,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         logger.warning("onCreate");
-        //DatabaseManager.updateLocalDatabase(this);
-
-        dbHelper dbhelper = new dbHelper(this.getApplicationContext());
+        DatabaseManager.updateLocalDatabase(this);
 
         setContentView(R.layout.activity_main);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/DistProTh.ttf");
@@ -98,42 +91,6 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void testEndPoints(){
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "JatCat"));
-    }
-
-    public long insertIntoDatabase(){
-
-        this.getApplicationContext().deleteDatabase(dbHelper.DATABASE_NAME);
-
-        dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
-        SQLiteDatabase db = tDbHelper.getWritableDatabase();
-
-        // Second Step: Create ContentValues of what you want to insert
-        // (you can use the createNorthPoleLocationValues if you wish)
-        ContentValues testValues = createUserValues();
-
-        // Third Step: Insert ContentValues into database and get a row ID back
-        long userRowId;
-        userRowId = db.insert(KeeperContract.UserEntry.TABLE_NAME, null, testValues);
-
-        return userRowId;
-    }
-
-    static ContentValues createUserValues() {
-        ContentValues userValues = new ContentValues();
-        userValues.put(KeeperContract.UserEntry.COLUMN_FIRST_NAME, "test");
-        userValues.put(KeeperContract.UserEntry.COLUMN_LAST_NAME, "test");
-        userValues.put(KeeperContract.UserEntry.COLUMN_NICKNAME, "test");
-
-        return userValues;
-
-    }
-
-    public void clearDb(){
-        this.getApplicationContext().deleteDatabase(dbHelper.DATABASE_NAME);
-
-    }
 }
 
 
