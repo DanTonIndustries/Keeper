@@ -1,6 +1,7 @@
 package com.example.antonnazareth.keeper;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,18 +12,17 @@ import android.widget.Button;
 
 public class LbPlayerChoiceActivity extends ActionBarActivity {
 
+    private String customFont = uiUtilities.CUSTOM_FONT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lb_player_choice);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_lb_player_choice, menu);
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
         Button singleLbButton = (Button) findViewById(R.id.button14);
+        singleLbButton.setTypeface(font);
+
         singleLbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,6 +32,8 @@ public class LbPlayerChoiceActivity extends ActionBarActivity {
         });
 
         Button multiLbButton = (Button) findViewById(R.id.button14);
+        multiLbButton.setTypeface(font);
+
         singleLbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +41,14 @@ public class LbPlayerChoiceActivity extends ActionBarActivity {
                 startActivity(launchSettingsIntent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_lb_player_choice, menu);
+
+
 
         return true;
     }

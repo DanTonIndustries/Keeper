@@ -7,14 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.antonnazareth.keeper.data.DatabaseManager;
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
 
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         logger.warning("onCreate");
-        DatabaseManager.updateLocalDatabase(this);
+        //DatabaseManager.updateLocalDatabase(this);
 
         dbHelper dbhelper = new dbHelper(this.getApplicationContext());
 
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //insertIntoDatabase();
-                Intent launchSettingsIntent = new Intent(view.getContext(), AddUserActivity.class);
+                Intent launchSettingsIntent = new Intent(view.getContext(), UserTeamViewActivity.class);
                 startActivity(launchSettingsIntent);
             }
         });

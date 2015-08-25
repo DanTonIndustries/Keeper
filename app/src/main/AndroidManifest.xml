@@ -12,10 +12,11 @@
         android:name="com.example.antonnazareth.keeper.KeeperApp">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MainActFullTheme"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/MainActFullTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -46,6 +47,7 @@
         <activity
             android:name=".MatchActivity"
             android:label="@string/title_activity_match"
+            android:theme="@style/MainActFullTheme"
             android:parentActivityName=".GameActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -53,7 +55,7 @@
         </activity>
         <activity
             android:name=".AddUserActivity"
-            android:label="@string/title_activity_add_user"
+            android:label="Enter User Details"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -81,15 +83,31 @@
         </activity>
         <activity
             android:name=".AddTeam"
-            android:label="@string/title_activity_add_team" >
+            android:label="Add New Team" >
         </activity>
         <activity
             android:name=".SelectTeamActivity"
-            android:label="@string/title_activity_select_team" >
+            android:label="Select Teams" >
         </activity>
         <activity
             android:name=".selectUserActivity"
-            android:label="@string/title_activity_select_user" >
+            android:label="Select User" >
+        </activity>
+        <activity
+            android:name=".UserTeamViewActivity"
+            android:label="@string/title_activity_user_team_view"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.antonnazareth.keeper.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SingleUserMatchActivity"
+            android:label="@string/title_activity_single_user_match"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.antonnazareth.keeper.MainActivity" />
         </activity>
     </application>
 
