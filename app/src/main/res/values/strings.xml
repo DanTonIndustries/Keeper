@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Keeper</string>
 
     <string name="hello_world">Hello world!</string>
@@ -16,15 +17,34 @@
     <string name="title_activity_lb_player_choice">Choose Player Type</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
 
-
-    <string-array name="no_of_players_array">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
+    <string-array name="activity_multi_array">
+        <item>fooz</item>
+        <item>generic</item>
+        <item>add activity</item>
     </string-array>
+
+    <string-array name="activity_single_array">
+        <item>generic</item>
+        <item>add activity</item>
+    </string-array>
+
+    <string name="country_prompt">Choose a country</string>
+
+    <string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
+
     <string name="title_activity_add_team">AddTeam</string>
     <string name="title_activity_select_team">SelectTeamActivity</string>
     <string name="title_activity_select_user">selectUserActivity</string>
+    <string name="title_activity_user_team_view">UserTeamViewActivity</string>
+    <string name="title_activity_single_user_match">SingleUserMatchActivity</string>
 
 </resources>

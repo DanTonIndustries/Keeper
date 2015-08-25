@@ -7,8 +7,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowSoftInputMode">adjustPan</item>
-
     </style>
+
     <style name="MainActTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!--<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>-->
@@ -24,10 +24,31 @@
         <item name="android:clickable">true</item>
         <item name="android:layout_marginTop">3dp</item>
     </style>
-    <style name="listView" parent="@android:style/Widget.ListView">
+
+    <style name="alt_button" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/alt_button_selector</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <style name="delete_button" parent="@android:style/Widget.Button">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/delete_button_selector</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <style name="listViewTextItem" parent="@android:style/Widget.TextView">
+        <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">#000000</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
     </style>
@@ -37,11 +58,26 @@
     <style name="TextViewBase" parent="android:TextAppearance.Holo.Widget.TextView"/>-->
 
     <!-- ActionBar Title -->
-    <style name="CustomActionBarTitleBase" parent="TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+    <style name="CustomActionBarTitleBase" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+    </style>
 
     <style name="HeadingStyle" parent="TextAppearance.AppCompat.Display4">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="tableHeading" parent="@android:style/Widget.TextView">
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/table_view</item>
+
+        <!--<item name="android:fontFamily">sans-serif-light"</item>-->
+        <item name="android:textSize">20dp</item>
     </style>
     <!-- Text Views Default Base
 
