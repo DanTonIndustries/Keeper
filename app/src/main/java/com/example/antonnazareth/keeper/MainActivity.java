@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.antonnazareth.keeper.data.DatabaseManager;
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
 
@@ -28,9 +29,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         logger.warning("onCreate");
-        //DatabaseManager.updateLocalDatabase(this);
-
-        dbHelper dbhelper = new dbHelper(this.getApplicationContext());
+        DatabaseManager.updateLocalDatabase(this);
 
         setContentView(R.layout.activity_main);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/DistProTh.ttf");
@@ -96,10 +95,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void testEndPoints(){
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "JatCat"));
     }
 
     public long insertIntoDatabase(){

@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.antonnazareth.keeper.data.DbUtils;
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
 
@@ -107,7 +108,7 @@ public class AddTeam extends ActionBarActivity {
                     finish();
                 }
                 else{
-                    insertIntoDatabase(teamName);
+                    DbUtils.addTeam(teamName);
                     Intent returnTeamNameIntent = new Intent(view.getContext(), SelectTeamActivity.class)
                             .putExtra("teamName", teamName);
                     setResult(RESULT_OK, returnTeamNameIntent);
@@ -176,26 +177,6 @@ public class AddTeam extends ActionBarActivity {
 
     public void confirmTeam() {
         String bob = "1";
-    }
-
-    public long insertIntoDatabase(String teamName){
-
-        //this.getApplicationContext().deleteDatabase(dbHelper.DATABASE_NAME);
-
-        dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
-        SQLiteDatabase db = tDbHelper.getWritableDatabase();
-
-        // Second Step: Create ContentValues of what you want to insert
-        // (you can use the createNorthPoleLocationValues if you wish)
-        ContentValues teamValues = new ContentValues();
-        teamValues.put(KeeperContract.TeamEntry.COLUMN_TEAM_NAME, teamName);
-
-
-        // Third Step: Insert ContentValues into database and get a row ID back
-        long userRowId;
-        userRowId = db.insert(KeeperContract.TeamEntry.TABLE_NAME, null, teamValues);
-        db.close();
-        return userRowId;
     }
 
     public void queryDatabase(){

@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.antonnazareth.keeper.data.DatabaseManager;
+import com.example.antonnazareth.keeper.data.DbUtils;
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
 
@@ -65,7 +67,7 @@ public class AddUserActivity extends ActionBarActivity {
                     finish();
                 } else {
 
-                    insertIntoDatabase(firstName, lastName, nickname);
+                    DbUtils.addUser(firstName, lastName, nickname);
                     Intent newIntent = new Intent();
                     newIntent.putExtra("userName", firstName);
                     setResult(Activity.RESULT_OK, newIntent);
@@ -94,30 +96,9 @@ public class AddUserActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public long insertIntoDatabase(String firstName, String lastName, String nickname){
-
-        //this.getApplicationContext().deleteDatabase(dbHelper.DATABASE_NAME);
-
-        dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
-        SQLiteDatabase db = tDbHelper.getWritableDatabase();
-
-        String fullName = firstName + lastName;
-
-        ContentValues userValues = new ContentValues();
-        userValues.put(KeeperContract.UserEntry.COLUMN_FIRST_NAME, firstName);
-        userValues.put(KeeperContract.UserEntry.COLUMN_LAST_NAME, lastName);
-        userValues.put(KeeperContract.UserEntry.COLUMN_NICKNAME, nickname);
-
-        long userRowId;
-        userRowId = db.insert(KeeperContract.UserEntry.TABLE_NAME, null, userValues);
-
-        return userRowId;
-    }
-
 
     public void clearDb(){
         this.getApplicationContext().deleteDatabase(dbHelper.DATABASE_NAME);
-
     }
 
 

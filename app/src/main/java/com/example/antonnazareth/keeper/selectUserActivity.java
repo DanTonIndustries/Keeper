@@ -176,7 +176,6 @@ public class selectUserActivity extends ActionBarActivity {
 
         cursor.moveToFirst();
 
-
         while (!cursor.isAfterLast()) {
             String firstName = cursor.getString(
                     cursor.getColumnIndexOrThrow(KeeperContract.UserEntry.COLUMN_FIRST_NAME)
