@@ -50,7 +50,19 @@ public class AddTeam extends ActionBarActivity {
         for (int i = 0; i < values.length; ++i) {
             arrayList.add(values[i]);
         }
-        mTeamUsersAdapter = new CustomAdapter(this, arrayList, R.drawable.user);
+        mTeamUsersAdapter = new CustomAdapter(this, arrayList, R.drawable
+                .clouds);
+
+        //TODO: Query for getting users of team.
+
+        //TODO: Mega query for scores.
+
+        //TODO: Function for removing from db.
+
+        //TODO: Function for adding to db.
+
+        //TODO: Leaderboard query, filterable by activity.
+        //TODO: For users and teams.
 
 //        mTeamUsersAdapter =
 //                new ArrayAdapter<String>(

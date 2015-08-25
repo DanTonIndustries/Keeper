@@ -54,7 +54,7 @@ public class SelectTeamActivity extends ActionBarActivity {
 //                        R.layout.team_list_item, // The name of the layout ID.
 //                        R.id.team_list_item_textView, // The ID of the textview to populate.
 //                        arrayList);
-        mTeamAdapt = new CustomAdapter(this, arrayList, R.drawable.team_shirt);
+        mTeamAdapt = new CustomAdapter(this, arrayList, R.drawable.clouds);
 
         // Get a reference to the ListView, and attach this adapter to it.
         //listView.setAdapter(mTeamAdapter);

@@ -19,7 +19,7 @@ import com.example.antonnazareth.keeper.data.dbHelper;
 import java.util.logging.Logger;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActionBarActivity {
     private static final Logger logger = Logger.getLogger(MainActivity.class
             .getName());
 

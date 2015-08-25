@@ -67,7 +67,7 @@ public class selectUserActivity extends ActionBarActivity {
 //                        R.id.user_list_item_textView, // The ID of the textview to populate.
 //                        arrayList);
 
-        mUserAdapter = new CustomAdapter(this, arrayList, R.drawable.user);
+        mUserAdapter = new CustomAdapter(this, arrayList, R.drawable.clouds);
 
         // Get a reference to the ListView, and attach this adapter to it.
         listView.setAdapter(mUserAdapter);

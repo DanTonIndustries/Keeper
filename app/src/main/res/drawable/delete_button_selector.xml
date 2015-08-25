@@ -4,8 +4,8 @@
     <item
         android:state_pressed="true"
         android:state_enabled="true"
-        android:drawable="@drawable/del_button_clicked" />
+        android:drawable="@drawable/clouds" />
     <item
         android:state_enabled="true"
-        android:drawable="@drawable/del_button" />
+        android:drawable="@drawable/clouds" />
 </selector>

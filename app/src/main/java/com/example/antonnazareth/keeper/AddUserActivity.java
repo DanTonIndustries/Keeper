@@ -106,7 +106,6 @@ public class AddUserActivity extends ActionBarActivity {
         ContentValues userValues = new ContentValues();
         userValues.put(KeeperContract.UserEntry.COLUMN_FIRST_NAME, firstName);
         userValues.put(KeeperContract.UserEntry.COLUMN_LAST_NAME, lastName);
-        userValues.put(KeeperContract.UserEntry.COLUMN_FULL_NAME, fullName);
         userValues.put(KeeperContract.UserEntry.COLUMN_NICKNAME, nickname);
 
         long userRowId;

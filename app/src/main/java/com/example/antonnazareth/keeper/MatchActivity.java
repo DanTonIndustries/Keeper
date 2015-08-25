@@ -61,6 +61,7 @@ public class MatchActivity extends ActionBarActivity {
         EditText editText2 = (EditText) findViewById(R.id.scoreText1);
         editText2.setRawInputType(2);
 
+        //TODO: Get saveScore working!
         Button enterScoreButton = (Button) findViewById(R.id.button9);
         enterScoreButton.setTypeface(font);
         enterScoreButton.setOnClickListener(new View.OnClickListener() {
