@@ -1,6 +1,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_image_test"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -20,7 +22,7 @@
         android:id="@+id/button14"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Individual"
+        android:text="INDIVIDUAL"
         android:layout_weight="1"/>
 
     <View
@@ -32,7 +34,7 @@
         android:id="@+id/button15"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Teams"
+        android:text="TEAMS"
         android:layout_weight="1"/>
 
 </LinearLayout>

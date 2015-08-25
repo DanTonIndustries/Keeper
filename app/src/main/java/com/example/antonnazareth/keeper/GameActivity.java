@@ -1,6 +1,7 @@
 package com.example.antonnazareth.keeper;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,10 +12,13 @@ import android.widget.Button;
 
 public class GameActivity extends ActionBarActivity {
 
+    private String customFont = uiUtilities.CUSTOM_FONT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
     }
 
     @Override
@@ -23,6 +27,10 @@ public class GameActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_game, menu);
 
         Button newScoreButton = (Button) findViewById(R.id.button7);
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
+        newScoreButton.setTypeface(font);
+
         newScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

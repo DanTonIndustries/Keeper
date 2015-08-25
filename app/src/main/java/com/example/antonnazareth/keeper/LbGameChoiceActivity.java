@@ -1,6 +1,7 @@
 package com.example.antonnazareth.keeper;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,19 +12,17 @@ import android.widget.Button;
 
 public class LbGameChoiceActivity extends ActionBarActivity {
 
+    private String customFont = uiUtilities.CUSTOM_FONT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lb_game_choice);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_lb_game_choice, menu);
-
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
         Button AllLeaderboardButton = (Button) findViewById(R.id.button11);
+        AllLeaderboardButton.setTypeface(font);
+
         AllLeaderboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,6 +33,8 @@ public class LbGameChoiceActivity extends ActionBarActivity {
 
 
         Button FoozLeaderboardButton = (Button) findViewById(R.id.button12);
+        FoozLeaderboardButton.setTypeface(font);
+
         FoozLeaderboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +45,8 @@ public class LbGameChoiceActivity extends ActionBarActivity {
 
 
         Button teaLeaderboardButton = (Button) findViewById(R.id.button13);
+        teaLeaderboardButton.setTypeface(font);
+
         teaLeaderboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +54,15 @@ public class LbGameChoiceActivity extends ActionBarActivity {
                 startActivity(launchSettingsIntent);
             }
         });
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_lb_game_choice, menu);
+
         return true;
     }
 

@@ -2,18 +2,21 @@ package com.example.antonnazareth.keeper;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.antonnazareth.keeper.data.KeeperContract;
 import com.example.antonnazareth.keeper.data.dbHelper;
@@ -23,12 +26,17 @@ import java.util.ArrayList;
 
 public class AddTeam extends ActionBarActivity {
 
-    public ArrayAdapter<String> mTeamUsersAdapter;
+    //public ArrayAdapter<String> mTeamUsersAdapter;
+    public CustomAdapter mTeamUsersAdapter;
+    private String customFont = uiUtilities.CUSTOM_FONT;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_team);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
 
         //inherit from selectTeam
@@ -42,21 +50,40 @@ public class AddTeam extends ActionBarActivity {
         for (int i = 0; i < values.length; ++i) {
             arrayList.add(values[i]);
         }
+        mTeamUsersAdapter = new CustomAdapter(this, arrayList, R.drawable
+                .clouds);
 
-        mTeamUsersAdapter =
-                new ArrayAdapter<String>(
-                        this, // The current context (this activity)
-                        R.layout.team_users_list_item, // The name of the layout ID.
-                        R.id.team_user_list_item_textView, // The ID of the textview to populate.
-                        arrayList);
+        //TODO: Query for getting users of team.
+
+        //TODO: Mega query for scores.
+
+        //TODO: Function for removing from db.
+
+        //TODO: Function for adding to db.
+
+        //TODO: Leaderboard query, filterable by activity.
+        //TODO: For users and teams.
+
+//        mTeamUsersAdapter =
+//                new ArrayAdapter<String>(
+//                        this, // The current context (this activity)
+//                        R.layout.team_users_list_item, // The name of the layout ID.
+//                        R.id.team_user_list_item_textView, // The ID of the textview to populate.
+//                        arrayList);
 
 
         // Get a reference to the ListView, and attach this adapter to it.
         listView.setAdapter(mTeamUsersAdapter);
 
-        queryDatabase();
+        TextView teamMembersTextView = (TextView) findViewById(R.id.teamMembersTextView);
+        teamMembersTextView.setTypeface(font);
+
+        TextView teamNameTextView = (TextView) findViewById(R.id.teamNameTextView);
+        teamNameTextView.setTypeface(font);
 
         Button addUserButton = (Button) findViewById(R.id.addUserToTeam);
+        addUserButton.setTypeface(font);
+
         addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +94,8 @@ public class AddTeam extends ActionBarActivity {
         });
 
         Button confirmTeamButton = (Button) findViewById(R.id.confirmTeam);
+        confirmTeamButton.setTypeface(font);
+
         confirmTeamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +114,22 @@ public class AddTeam extends ActionBarActivity {
                     finish();
                 }
 
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                long viewId = view.getId();
+                Context context = getApplicationContext();
+
+                if (viewId == R.id.delete_btn) {
+                    //Toast.makeText(context, "Button 1 clicked", Toast.LENGTH_SHORT).show();
+                    mTeamUsersAdapter.remove(position);
+                    //removeFromDatabase(user);
+                }
             }
         });
     }
@@ -124,7 +169,9 @@ public class AddTeam extends ActionBarActivity {
     }
 
     public void updateTeamList(String userName){
+
         mTeamUsersAdapter.add(userName);
+        mTeamUsersAdapter.notifyDataSetChanged();
     }
 
     public void confirmTeam() {
@@ -153,7 +200,7 @@ public class AddTeam extends ActionBarActivity {
 
     public void queryDatabase(){
 
-        mTeamUsersAdapter.clear();
+        mTeamUsersAdapter.clearData();
 
         dbHelper tDbHelper = new dbHelper(this.getApplicationContext());
         SQLiteDatabase db = tDbHelper.getReadableDatabase(); //needs to BE DONE ON ASYNCTASK!!!
