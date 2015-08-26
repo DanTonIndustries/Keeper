@@ -16,8 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.antonnazareth.keeper.EntityClasses.TeamEntity;
+import com.example.antonnazareth.keeper.data.DatabaseManager;
 import com.example.antonnazareth.keeper.data.DbUtils;
-import com.example.antonnazareth.keeper.data.KeeperContract;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class SelectTeamActivity extends ActionBarActivity {
 
     //public ArrayAdapter<String> mTeamAdapter;
-    public CustomAdapter mTeamAdapt;
+    public CustomTeamAdapter mTeamAdapt;
 
     private String customFont = uiUtilities.CUSTOM_FONT;
 
@@ -42,10 +43,7 @@ public class SelectTeamActivity extends ActionBarActivity {
         ListView listView = (ListView) findViewById(R.id.list_view_teams);
         String[] values = new String[] {"jat"};
 
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            arrayList.add(values[i]);
-        }
+        ArrayList<TeamEntity> arrayList = new ArrayList<TeamEntity>();
 
 //        mTeamAdapter =
 //                new ArrayAdapter<String>(
@@ -53,7 +51,7 @@ public class SelectTeamActivity extends ActionBarActivity {
 //                        R.layout.team_list_item, // The name of the layout ID.
 //                        R.id.team_list_item_textView, // The ID of the textview to populate.
 //                        arrayList);
-        mTeamAdapt = new CustomAdapter(this, arrayList, R.drawable.clouds);
+        mTeamAdapt = new CustomTeamAdapter(this, arrayList, R.drawable.team_shirt);
 
         // Get a reference to the ListView, and attach this adapter to it.
         //listView.setAdapter(mTeamAdapter);
@@ -77,6 +75,8 @@ public class SelectTeamActivity extends ActionBarActivity {
 
                 if (viewId == R.id.delete_btn) {
                     //Toast.makeText(context, "Button 1 clicked", Toast.LENGTH_SHORT).show();
+                    int teamId = mTeamAdapt.getId(position);
+                    DbUtils.removeTeam(teamId);
                     mTeamAdapt.remove(position);
                 } else {
                     //Toast.makeText(context, "ListView clicked" + id, Toast.LENGTH_SHORT).show();
@@ -129,7 +129,7 @@ public class SelectTeamActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent intent) {
         if(resultCode == Activity.RESULT_OK ) {
-            String teamName = intent.getExtras().getString("teamName");
+            int teamId = intent.getExtras().getInt("teamId");
             queryDatabase();
         }
         else if (resultCode == Activity.RESULT_CANCELED) {
@@ -137,8 +137,8 @@ public class SelectTeamActivity extends ActionBarActivity {
         }
     }
 
-    public void updateTeamList(String teamName){
-        mTeamAdapt.add(teamName);
+    public void updateTeamList(TeamEntity team){
+        mTeamAdapt.add(team);
     }
 
 
@@ -162,13 +162,15 @@ public class SelectTeamActivity extends ActionBarActivity {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            String teamName = cursor.getString(
-                    cursor.getColumnIndexOrThrow(KeeperContract.TeamEntry.COLUMN_TEAM_NAME)
-            );
-            updateTeamList(teamName);
+            TeamEntity team = new TeamEntity(cursor);
+//            String teamName = cursor.getString(
+//                    cursor.getColumnIndexOrThrow(KeeperContract.TeamEntry.COLUMN_TEAM_NAME)
+//            );
+            updateTeamList(team);
             cursor.moveToNext();
         }
 
+        DatabaseManager.getInstance().closeDatabase();
 
         mTeamAdapt.notifyDataSetChanged();
 

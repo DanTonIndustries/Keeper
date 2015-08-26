@@ -23,6 +23,11 @@
         <item>add activity</item>
     </string-array>
 
+    <string-array name="user_num_array">
+        <item>single user activity</item>
+        <item>team activity</item>
+    </string-array>
+
     <string-array name="activity_single_array">
         <item>generic</item>
         <item>add activity</item>

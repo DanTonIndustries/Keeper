@@ -31,7 +31,7 @@ public class CustomAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater=null;
 
-//    public CustomAdapter(Activity activity, String[] itemStrings, int[] itemImages) {
+    //    public CustomAdapter(Activity activity, String[] itemStrings, int[] itemImages) {
     public CustomAdapter(Activity activity, ArrayList<String> itemStrings, int imageResource){//}, OnClickListener clickListen) {
 
         result=itemStrings;

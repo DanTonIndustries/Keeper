@@ -79,6 +79,10 @@
         <!--<item name="android:fontFamily">sans-serif-light"</item>-->
         <item name="android:textSize">20dp</item>
     </style>
+
+    <style parent="@android:style/Widget.Spinner" name="SpinnerAsEditText">
+        <item name="android:background">@android:drawable/edit_text</item>
+    </style>
     <!-- Text Views Default Base
 
     <style name="TextViewDisplay3" parent="TextAppearance.AppCompat.Display3">

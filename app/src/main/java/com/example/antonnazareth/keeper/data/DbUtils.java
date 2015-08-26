@@ -368,4 +368,36 @@ public class DbUtils {
 
         DatabaseManager.getInstance().closeDatabase();
     }
+
+    public static Cursor getTeamById(int teamid){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.TeamEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                KeeperContract.TeamEntry.COLUMN_TEAM_ID + " = ?",// "where"
+                new String[] {String.valueOf(teamid)}, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
+    }
+
+    public static Cursor getUserById(int userid){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = database.query(
+                KeeperContract.UserEntry.TABLE_NAME,  // Table to Query
+                null, // columns
+                KeeperContract.UserEntry.COLUMN_USER_ID + " = ?",// "where"
+                new String[] {String.valueOf(userid)}, // Values for the "where"
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        return cursor;
+    }
 }

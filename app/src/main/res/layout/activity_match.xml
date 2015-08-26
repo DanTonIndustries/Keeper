@@ -9,33 +9,38 @@
 
     tools:context="com.example.antonnazareth.keeper.MatchActivity">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activityChoiceTextView"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="top|center_vertical"
         android:background="#474747"
-        android:text="FOOZ"
-        android:textColor="#FFFFFF"
-        android:textSize="25dp"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:layout_weight="0.1">
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="0.8"
+            android:background="#474747"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="0dp"
         android:layout_weight="0.05"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_weight="1">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"

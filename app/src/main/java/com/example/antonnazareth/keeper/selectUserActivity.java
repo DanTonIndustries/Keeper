@@ -15,9 +15,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.antonnazareth.keeper.EntityClasses.UserEntity;
 import com.example.antonnazareth.keeper.data.DatabaseManager;
 import com.example.antonnazareth.keeper.data.DbUtils;
-import com.example.antonnazareth.keeper.data.KeeperContract;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class selectUserActivity extends ActionBarActivity {
 
     //public ArrayAdapter<String> mUserAdapter;
-    public CustomAdapter mUserAdapter;
+    public CustomUserAdapter mUserAdapter;
     private String customFont = uiUtilities.CUSTOM_FONT;
 
 
@@ -53,10 +53,11 @@ public class selectUserActivity extends ActionBarActivity {
         ListView listView = (ListView) findViewById(R.id.list_view_users);
         String[] values = new String[] {""};
 
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            arrayList.add(values[i]);
-        }
+
+
+        ArrayList<UserEntity> arrayList = new ArrayList<UserEntity>();
+
+        mUserAdapter = new CustomUserAdapter(this, arrayList, R.drawable.user);
 
 //        mUserAdapter =
 //                new ArrayAdapter<String>(
@@ -65,7 +66,6 @@ public class selectUserActivity extends ActionBarActivity {
 //                        R.id.user_list_item_textView, // The ID of the textview to populate.
 //                        arrayList);
 
-        mUserAdapter = new CustomAdapter(this, arrayList, R.drawable.clouds);
 
         // Get a reference to the ListView, and attach this adapter to it.
         listView.setAdapter(mUserAdapter);
@@ -85,15 +85,17 @@ public class selectUserActivity extends ActionBarActivity {
 
                 if (viewId == R.id.delete_btn) {
                     //Toast.makeText(context, "Button 1 clicked", Toast.LENGTH_SHORT).show();
+                    int userId = mUserAdapter.getId(position);
+                    DbUtils.removeUser(userId);
                     mUserAdapter.remove(position);
                     //removeFromDatabase(user);
                 } else {
                     //Toast.makeText(context, "ListView clicked" + id, Toast.LENGTH_SHORT).show();
-                    String userName = mUserAdapter.getText(position);
-
+                    int userId = mUserAdapter.getId(position);
                     Intent newIntent = new Intent();
-                    newIntent.putExtra("userName", userName);
+                    newIntent.putExtra("userId", userId);
                     setResult(Activity.RESULT_OK, newIntent);
+                    //Toast.makeText(context, "user sent id = " + id, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -151,8 +153,8 @@ public class selectUserActivity extends ActionBarActivity {
             queryDatabase();
         }
     }
-    public void updateUserList(String userName){
-        mUserAdapter.add(userName);
+    public void updateUserList(UserEntity userEntity){
+        mUserAdapter.add(userEntity);
     }
 
     public void queryDatabase(){
@@ -164,10 +166,8 @@ public class selectUserActivity extends ActionBarActivity {
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
-            String firstName = cursor.getString(
-                    cursor.getColumnIndexOrThrow(KeeperContract.UserEntry.COLUMN_FIRST_NAME)
-            );
-            updateUserList(firstName);
+            UserEntity userEntity = new UserEntity(cursor);
+            updateUserList(userEntity);
 
             cursor.moveToNext();
         }

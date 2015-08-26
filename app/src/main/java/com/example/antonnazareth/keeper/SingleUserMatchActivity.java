@@ -10,11 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class SingleUserMatchActivity extends AppCompatActivity {
 
     private String customFont = uiUtilities.CUSTOM_FONT;
+    Spinner singleMatchTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,17 @@ public class SingleUserMatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_user_match);
 
         Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
+        String[] values = new String[] {"GENERIC"};
+
+        ArrayList<String> arrayList = new ArrayList<String>();
+        for (int i = 0; i < values.length; ++i) {
+            arrayList.add(values[i]);
+        }
+
+        singleMatchTitle = (Spinner) findViewById(R.id.spinner2);
+        CustomArrayAdapter myAdapter = new CustomArrayAdapter(this, R.id.activityChoiceTextView, arrayList);
+        singleMatchTitle.setAdapter(myAdapter);
 
         EditText editText = (EditText) findViewById(R.id.userScoreText1);
         editText.setRawInputType(2);

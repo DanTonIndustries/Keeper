@@ -8,6 +8,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
     tools:context="com.example.antonnazareth.keeper.AddTeam">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,22 +20,18 @@
         android:gravity="center"
         android:layout_weight="0.2">
 
-        <TextView android:text="TEAM NAME"
-            android:id="@+id/teamNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"/>
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/teamNameEditTxt"
+            android:id="@+id/teamNameEditText"
             android:text=""
+            android:hint="TEAM NAME"
             android:layout_weight="1"
-            android:singleLine="true"
-            android:inputType="text"
+            android:paddingLeft="8dp"
             android:imeOptions="actionDone"
-            android:gravity="center"/>
+            android:singleLine="true"
+            android:background="#FFFFFF"
+            android:gravity="left|center_vertical"/>
 
     </LinearLayout>
 

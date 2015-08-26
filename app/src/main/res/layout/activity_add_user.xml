@@ -11,6 +11,11 @@
     android:orientation="vertical"
     tools:context="com.example.antonnazareth.keeper.AddUserActivity">
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,20 +23,24 @@
         android:gravity="center"
         android:layout_weight="1">
 
-        <TextView android:text="FIRST NAME"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/enter_first_name"
             android:text=""
+            android:hint="FIRST NAME"
             android:layout_weight="1"
             android:singleLine="true"
-            android:gravity="center"/>
+            android:paddingLeft="8dp"
+            android:background="#FFFFFF"
+            android:gravity="left|center_vertical"/>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="0.1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,20 +49,26 @@
         android:gravity="center"
         android:layout_weight="1">
 
-        <TextView android:text="LAST NAME"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/enter_last_name"
             android:text=""
+            android:hint="LAST NAME"
             android:layout_weight="1"
             android:singleLine="true"
-            android:gravity="center"/>
+            android:background="#FFFFFF"
+            android:paddingLeft="8dp"
+            android:gravity="left|center_vertical"/>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_weight="0.1"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,18 +76,17 @@
         android:gravity="center"
         android:layout_weight="1">
 
-        <TextView android:text="NICKNAME"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/enter_nickname"
             android:text=""
+            android:hint="NICKNAME"
             android:layout_weight="1"
+            android:paddingLeft="8dp"
             android:singleLine="true"
-            android:gravity="center"/>
+            android:background="#FFFFFF"
+            android:gravity="left|center_vertical"/>
 
     </LinearLayout>
 
@@ -80,7 +94,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.25"/>
 
     <Button
         android:id="@+id/button20"
@@ -89,11 +103,8 @@
         android:text="OK"
         android:layout_weight="1"/>
 
-        <Button
-        android:id="@+id/clearDb"
-        style="@style/button"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Clear DB For Testing"
-        android:layout_weight="1"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"/>
 </LinearLayout>
