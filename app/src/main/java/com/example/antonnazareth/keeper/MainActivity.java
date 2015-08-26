@@ -1,6 +1,7 @@
 package com.example.antonnazareth.keeper;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.antonnazareth.keeper.data.DatabaseManager;
+import com.example.antonnazareth.keeper.data.DbUtils;
+import com.example.antonnazareth.keeper.data.KeeperContract;
 
 import java.util.logging.Logger;
 
@@ -24,6 +27,9 @@ public class MainActivity extends ActionBarActivity {
 
         logger.warning("onCreate");
         DatabaseManager.updateLocalDatabase(this);
+
+
+
 
         setContentView(R.layout.activity_main);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/DistProTh.ttf");

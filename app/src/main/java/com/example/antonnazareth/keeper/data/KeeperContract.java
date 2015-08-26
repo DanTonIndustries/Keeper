@@ -148,6 +148,7 @@ public class KeeperContract {
         public static final String COLUMN_MATCH_ID = "matchid";
         public static final String COLUMN_TEAM_ID = "teamid";
         public static final String COLUMN_SCORE = "score";
+        public static final String COLUMN_WINPTS = "winpts";
 
         public static Uri buildTeamUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
