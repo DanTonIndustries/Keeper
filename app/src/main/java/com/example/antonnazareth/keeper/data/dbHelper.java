@@ -41,7 +41,7 @@ public class dbHelper extends SQLiteOpenHelper {
             .getName());
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NAME = "keeper.db";
 
     private static MyApi myApiService = null;
@@ -97,6 +97,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 KeeperContract.ScoreEntry.COLUMN_MATCH_ID + " INTEGER NOT NULL, " +
                 KeeperContract.ScoreEntry.COLUMN_TEAM_ID + " INTEGER NOT NULL, " +
                 KeeperContract.ScoreEntry.COLUMN_SCORE + " INTEGER NOT NULL, " +
+                KeeperContract.ScoreEntry.COLUMN_WINPTS + " INTEGER NOT NULL, " +
                 "PRIMARY KEY(" +
                 KeeperContract.ScoreEntry.COLUMN_TEAM_ID + ", " +
                 KeeperContract.ScoreEntry.COLUMN_MATCH_ID + "), " +

@@ -25,6 +25,7 @@ public class UpdateLocalScoresAsync extends AsyncTask<Void, Void, String> {
         private int teamid;
         private int matchid;
         private int score;
+        private int winpts;
 
         private void addToLocalDb(SQLiteDatabase db){
             ContentValues values = new ContentValues();
@@ -32,6 +33,7 @@ public class UpdateLocalScoresAsync extends AsyncTask<Void, Void, String> {
             values.put(KeeperContract.ScoreEntry.COLUMN_SCORE, score);
             values.put(KeeperContract.ScoreEntry.COLUMN_MATCH_ID, matchid);
             values.put(KeeperContract.ScoreEntry.COLUMN_TEAM_ID, teamid);
+            values.put(KeeperContract.ScoreEntry.COLUMN_WINPTS, winpts);
 
             long newRowId;
             newRowId = db.insert(KeeperContract.ScoreEntry.TABLE_NAME,

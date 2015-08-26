@@ -228,7 +228,8 @@ public class MyEndpoint {
     @ApiMethod(name = "addScore", path="add/score")
     public MyBean addScore(@Named("matchid") int matchid,
                            @Named("teamid") int teamid,
-                           @Named("score") int score) {
+                           @Named("score") int score,
+                           @Named("winpts") int winpts) {
         logger.info("Calling addScore method");
         MyBean bean = new MyBean();
 
@@ -243,6 +244,7 @@ public class MyEndpoint {
             ps.setInt(1, matchid);
             ps.setInt(2, teamid);
             ps.setInt(3, score);
+            ps.setInt(4, winpts);
 
             bean = runStmt(conn, ps);
 
