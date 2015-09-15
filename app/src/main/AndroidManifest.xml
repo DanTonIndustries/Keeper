@@ -95,7 +95,7 @@
         </activity>
         <activity
             android:name=".UserTeamViewActivity"
-            android:label="@string/title_activity_user_team_view"
+            android:label="View Users in Team"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -103,7 +103,7 @@
         </activity>
         <activity
             android:name=".SingleUserMatchActivity"
-            android:label="@string/title_activity_single_user_match"
+            android:label="Single User Match"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

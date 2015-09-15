@@ -5,15 +5,8 @@
         jar="/Users/antonnazareth/AndroidStudioProjects/Keeper/backend/build/libs/backend-android-endpoints.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="a4638abc4fe6330518a75b0e04060f1288775533">
+        sha1="e7a01ae3f743ff22e3befc808b497f8276a74c99">
         <dex dex="/Users/antonnazareth/AndroidStudioProjects/Keeper/app/build/intermediates/pre-dexed/debug/backend-android-endpoints-dc66c41aa2407a3ada6cfe1c48a4981e4f53cc94.jar" />
-    </item>
-    <item
-        jar="/Users/antonnazareth/AndroidStudioProjects/Keeper/app/libs/gson-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/antonnazareth/AndroidStudioProjects/Keeper/app/build/intermediates/pre-dexed/debug/gson-2.3.1-76c4d7379cf8104c25a22e2328565ff0ec6895bd.jar" />
     </item>
 
 </items>

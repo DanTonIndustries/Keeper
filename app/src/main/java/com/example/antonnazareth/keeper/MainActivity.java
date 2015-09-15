@@ -9,8 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.antonnazareth.keeper.data.DatabaseManager;
-
 import java.util.logging.Logger;
 
 
@@ -23,7 +21,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         logger.warning("onCreate");
-        DatabaseManager.updateLocalDatabase(this);
+        //DatabaseManager.updateLocalDatabase(this);
+
+
+
 
         setContentView(R.layout.activity_main);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/DistProTh.ttf");
@@ -54,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         lbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent launchSettingsIntent = new Intent(view.getContext(), LbGameChoiceActivity.class);
+                Intent launchSettingsIntent = new Intent(view.getContext(), LeaderboardActivity.class);
                 startActivity(launchSettingsIntent);
                 //testEndPoints();
             }

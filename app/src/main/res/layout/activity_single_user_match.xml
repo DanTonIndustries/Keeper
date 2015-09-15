@@ -33,19 +33,6 @@ tools:context="com.example.antonnazareth.keeper.SingleUserMatchActivity">
             android:layout_height="match_parent"
             android:layout_weight="0.01"/>
 
-        <Button
-            android:id="@+id/addSingleActivity"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="+"
-            android:tag="1"
-            android:layout_weight="0.1"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.01"/>
-
     </LinearLayout>
 
     <View

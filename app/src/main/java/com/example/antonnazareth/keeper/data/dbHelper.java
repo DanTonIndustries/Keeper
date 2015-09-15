@@ -17,20 +17,12 @@ package com.example.antonnazareth.keeper.data;
 
 //import com.example.antonnazareth.keeper.data.KeeperContract.Team2UserEntry;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
 
-import com.example.antonnazareth.keeper.EntityClasses.UserEntity;
 import com.example.antonnazareth.keeper.backend.myApi.MyApi;
-import com.example.antonnazareth.keeper.backend.myApi.model.MyBean;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
-import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -41,7 +33,7 @@ public class dbHelper extends SQLiteOpenHelper {
             .getName());
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NAME = "keeper.db";
 
     private static MyApi myApiService = null;
@@ -97,6 +89,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 KeeperContract.ScoreEntry.COLUMN_MATCH_ID + " INTEGER NOT NULL, " +
                 KeeperContract.ScoreEntry.COLUMN_TEAM_ID + " INTEGER NOT NULL, " +
                 KeeperContract.ScoreEntry.COLUMN_SCORE + " INTEGER NOT NULL, " +
+                KeeperContract.ScoreEntry.COLUMN_WINPTS + " INTEGER NOT NULL, " +
                 "PRIMARY KEY(" +
                 KeeperContract.ScoreEntry.COLUMN_TEAM_ID + ", " +
                 KeeperContract.ScoreEntry.COLUMN_MATCH_ID + "), " +

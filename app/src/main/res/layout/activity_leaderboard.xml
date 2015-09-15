@@ -8,71 +8,46 @@
     tools:context="com.example.antonnazareth.keeper.LeaderboardActivity">
 
     <TableLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:stretchColumns="1">
-    <TableRow>
-        <TextView
-            android:text="Rank"
-            android:padding="3dip"
-            android:fontFamily="sans-serif-light"
-            style="@style/tableHeading"/>
-        <TextView
-            android:text="Player"
-            android:gravity="center"
-            android:fontFamily="sans-serif-light"
-            android:paddingTop="3dip"
-            style="@style/tableHeading"/>
-        <TextView
-            android:text="Wins"
-            android:gravity="center"
-            android:padding="3dip"
-            android:fontFamily="sans-serif-light"
-            style="@style/tableHeading"/>
-        <TextView
-            android:text="Points"
-            android:gravity="center"
-            android:padding="3dip"
-            android:fontFamily="sans-serif-light"
-            style="@style/tableHeading"/>
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:text="1"
-            android:gravity="center"
-            android:padding="3dip" />
-        <TextView
-            android:text="Danton"
-            android:gravity="center"
-            android:padding="3dip" />
-        <TextView
-            android:text="3"
-            android:gravity="center"
-            android:padding="3dip" />
-        <TextView
-            android:text="30"
-            android:gravity="center"
-            android:padding="3dip" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:text="2"
-            android:gravity="center"
-            android:padding="3dip" />
-        <TextView
-            android:text="JatCat"
-            android:gravity="center"
-            android:padding="3dip" />
-        <TextView
-            android:text="0"
-            android:gravity="center"
-            android:padding="3dip" />
-        <TextView
-            android:text="0"
-            android:gravity="center"
-            android:padding="3dip" />
-    </TableRow>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/teamleaderboardtable"
+        android:stretchColumns="1">
+        <TableRow>
+            <TextView
+                android:text="ID"
+                android:padding="3dip"
+                android:fontFamily="sans-serif-light"
+                style="@style/tableHeading"/>
+            <TextView
+                android:text="Team"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:paddingTop="3dip"
+                style="@style/tableHeading"/>
+            <TextView
+                android:text="Points"
+                android:gravity="center"
+                android:padding="3dip"
+                android:fontFamily="sans-serif-light"
+                style="@style/tableHeading"/>
+            <TextView
+                android:text="Win"
+                android:gravity="center"
+                android:padding="3dip"
+                android:fontFamily="sans-serif-light"
+                style="@style/tableHeading"/>
+            <TextView
+                android:text="Draw"
+                android:gravity="center"
+                android:padding="3dip"
+                android:fontFamily="sans-serif-light"
+                style="@style/tableHeading"/>
+            <TextView
+                android:text="Lose"
+                android:gravity="center"
+                android:padding="3dip"
+                android:fontFamily="sans-serif-light"
+                style="@style/tableHeading"/>
+        </TableRow>
     </TableLayout>
 </RelativeLayout>

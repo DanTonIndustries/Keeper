@@ -81,10 +81,12 @@ public class SelectTeamActivity extends ActionBarActivity {
                 } else {
                     //Toast.makeText(context, "ListView clicked" + id, Toast.LENGTH_SHORT).show();
                     String teamName = mTeamAdapt.getText(position);
+                    int teamId = mTeamAdapt.getId(position);
 
                     Intent newIntent = new Intent();
                     newIntent.putExtra("teamName", teamName);
                     newIntent.putExtra("teamNumber", teamNumber);
+                    newIntent.putExtra("teamId", teamId);
                     setResult(Activity.RESULT_OK, newIntent);
                     finish();
                 }

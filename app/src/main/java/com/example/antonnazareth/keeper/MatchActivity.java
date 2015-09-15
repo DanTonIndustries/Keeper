@@ -36,6 +36,8 @@ public class MatchActivity extends ActionBarActivity {
     TextView team2NameView;
     EditText scoreEditText;
     EditText scoreEditText2;
+    int team1Id;
+    int team2Id;
 
 
     @Override
@@ -62,6 +64,8 @@ public class MatchActivity extends ActionBarActivity {
             arrayList.add(gameName);
             cursor.moveToNext();
         }
+
+        cursor.close();
 
         DatabaseManager.getInstance().closeDatabase();
 
@@ -110,8 +114,8 @@ public class MatchActivity extends ActionBarActivity {
         enterScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveScore();
 
+                saveScore();
                 Intent launchSettingsIntent = new Intent(view.getContext(), MainActivity.class);
                 startActivity(launchSettingsIntent);
             }
@@ -244,6 +248,13 @@ public class MatchActivity extends ActionBarActivity {
         if(resultCode == Activity.RESULT_OK ){
             String teamNumber = intent.getExtras().getString("teamNumber");
             String teamName = intent.getExtras().getString("teamName");
+            int teamId = intent.getIntExtra("teamId",0);
+            if (teamNumber.equals("1")){
+                team1Id=teamId;
+            }
+            else if (teamNumber.equals("2")){
+                team2Id=teamId;
+            }
             updateTeamName(Integer.valueOf(teamNumber), teamName);
         }
 
@@ -264,27 +275,39 @@ public class MatchActivity extends ActionBarActivity {
     public int saveScore() {
         Context context = getApplicationContext();
         String game = matchTitle.getSelectedItem().toString();
-        String team1 = teamNameView.toString();
-        if (team1.equals("Team 1")) {
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "please select team 1", duration);
-            toast.show();
-            return 0;
-        }
-        String team2 = team2NameView.toString();
-        if (team2.equals("Team 2")) {
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "please select team 2", duration);
-            toast.show();
-            return 0;
-        }
+//        String team1 = teamNameView.toString();
+//        if (team1.equals("Team 1")) {
+//            int duration = Toast.LENGTH_SHORT;
+//            Toast toast = Toast.makeText(context, "please select team 1", duration);
+//            toast.show();
+//            return 0;
+//        }
+//        String team2 = team2NameView.toString();
+//        if (team2.equals("Team 2")) {
+//            int duration = Toast.LENGTH_SHORT;
+//            Toast toast = Toast.makeText(context, "please select team 2", duration);
+//            toast.show();
+//            return 0;
+//        }
+        scoreEditText2 = (EditText) findViewById(R.id.scoreText2);
+        String score2Text = scoreEditText2.getText().toString();
+        Integer team2Score = Integer.valueOf(score2Text);
+        scoreEditText = (EditText) findViewById(R.id.scoreText1);
+        String score1Text = scoreEditText.getText().toString();
+        Integer team1Score = Integer.valueOf(score1Text);
+
+     //   if (team1Id && team2Id){
+        DbUtils.addMatchResult(game, team1Id, team1Score, team2Id, team2Score);
+
+    //    }
+
+
         return 1;
     }
 //        String score1Text = scoreEditText.getText().toString();
 //        Integer team1Score = Integer.valueOf(score1Text);
 //
-//        String score2Text = scoreEditText2.getText().toString();
-//        Integer team2Score = Integer.valueOf(score2Text);
+
 //
 //        if (game.equals("FOOZ")) {
 //            if ((team1Score == 10) && (team2Score == 0)) {
