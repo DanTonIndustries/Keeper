@@ -2,6 +2,7 @@ package com.example.antonnazareth.keeper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,11 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.antonnazareth.keeper.EntityClasses.UserEntity;
+import com.example.antonnazareth.keeper.data.DbUtils;
+
+import java.util.ArrayList;
 
 public class SingleUserMatchActivity extends AppCompatActivity {
 
     private String customFont = uiUtilities.CUSTOM_FONT;
+    Spinner singleMatchTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +30,17 @@ public class SingleUserMatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_user_match);
 
         Typeface font = Typeface.createFromAsset(getAssets(), customFont);
+
+        String[] values = new String[] {"GENERIC"};
+
+        ArrayList<String> arrayList = new ArrayList<String>();
+        for (int i = 0; i < values.length; ++i) {
+            arrayList.add(values[i]);
+        }
+
+        singleMatchTitle = (Spinner) findViewById(R.id.singleUserSpinner);
+        CustomArrayAdapter myAdapter = new CustomArrayAdapter(this, R.id.activityChoiceTextView, arrayList);
+        singleMatchTitle.setAdapter(myAdapter);
 
         EditText editText = (EditText) findViewById(R.id.userScoreText1);
         editText.setRawInputType(2);
@@ -113,13 +132,17 @@ public class SingleUserMatchActivity extends AppCompatActivity {
         //Toast toast = Toast.makeText(this, "doingOAR", duration);
         //toast.show();
         if (resultCode == Activity.RESULT_OK) {
-            String userName = intent.getExtras().getString("userName");
+            int userName = intent.getExtras().getInt("userId");
             updateUserName(userName);
         }
 
     }
 
-    public void updateUserName(String userName) {
+    public void updateUserName(int userId) {
+        Cursor cursor = DbUtils.getUserById(userId);
+        cursor.moveToFirst();
+        UserEntity entity = new UserEntity(cursor);
+        String userName= entity.forename;
         TextView userNameView = (TextView) findViewById(R.id.user1Text);
         userNameView.setText(userName);
 

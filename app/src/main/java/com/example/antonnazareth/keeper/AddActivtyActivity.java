@@ -7,9 +7,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.EditText;
+
+import com.example.antonnazareth.keeper.data.DbUtils;
 
 
 public class AddActivtyActivity extends ActionBarActivity {
@@ -29,20 +30,31 @@ public class AddActivtyActivity extends ActionBarActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.activity_multi_array,
-//        android.R.layout.simple_spinner_item);
-                R.layout.my_spinner_textview);
-//    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        spinner.setAdapter(adapter);
+//        Spinner spinner = (Spinner) findViewById(R.id.userNumberSpinner);
+//
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.user_num_array,
+////        android.R.layout.simple_spinner_item);
+//                R.layout.alt_my_spinner_textview);
+////    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        adapter.setDropDownViewResource(R.layout.alt_my_spinner_textview);
+//        spinner.setAdapter(adapter);
 
         Button addActButton = (Button) findViewById(R.id.button10);
         addActButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent launchSettingsIntent = new Intent(view.getContext(), MainActivity.class);
-                startActivity(launchSettingsIntent);
+                EditText gameText = (EditText) findViewById(R.id.activity_name);
+                String gameName = gameText.getText().toString();
+                if (gameName.equals("")){
+                    Intent launchSettingsIntent = new Intent(view.getContext(), MainActivity.class);
+                    startActivity(launchSettingsIntent);
+                }
+                else{
+                    DbUtils.addGame(gameName);
+                    Intent launchSettingsIntent = new Intent(view.getContext(), MainActivity.class);
+                    startActivity(launchSettingsIntent);
+                }
+
             }
         });
 

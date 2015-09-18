@@ -51,6 +51,17 @@ public class PlayActivity extends ActionBarActivity {
             }
         });
 
+        final Button addActButton = (Button) findViewById(R.id.addAct);
+        addActButton.setTypeface(font);
+
+        addActButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent launchSettingsIntent = new Intent(view.getContext(), AddActivtyActivity.class);
+                startActivity(launchSettingsIntent);
+            }
+        });
+
 //        final Button genericButton = (Button) findViewById(R.id.button6);
 //        genericButton.setTypeface(font);
 //

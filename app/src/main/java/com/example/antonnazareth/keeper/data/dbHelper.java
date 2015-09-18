@@ -17,20 +17,12 @@ package com.example.antonnazareth.keeper.data;
 
 //import com.example.antonnazareth.keeper.data.KeeperContract.Team2UserEntry;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
 
-import com.example.antonnazareth.keeper.EntityClasses.UserEntity;
 import com.example.antonnazareth.keeper.backend.myApi.MyApi;
-import com.example.antonnazareth.keeper.backend.myApi.model.MyBean;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
-import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**

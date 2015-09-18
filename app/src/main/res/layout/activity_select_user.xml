@@ -22,7 +22,7 @@
         android:paddingTop="8dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_weight="0.03"/>
+        android:layout_weight="0.01"/>
 
     <ListView
         android:id="@+id/list_view_users"

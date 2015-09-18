@@ -33,14 +33,14 @@ public class AddUserActivity extends ActionBarActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), customFont);
 
 
-        Button clearDbButton = (Button) findViewById(R.id.clearDb);
-
-        clearDbButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearDb();
-            }
-        });
+//        Button clearDbButton = (Button) findViewById(R.id.clearDb);
+//
+//        clearDbButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                clearDb();
+//            }
+//        });
 
         Button addUser = (Button) findViewById(R.id.button20);
         addUser.setTypeface(font);

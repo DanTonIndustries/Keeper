@@ -413,7 +413,48 @@ public class DbUtils {
         // Now add the match result!
         addMatchResult(gameid, team1id, team1score, team2id, team2score);
 
-        DatabaseManager.getInstance().closeDatabase();
+    }
+
+    public static Cursor getTeamLeaderBoard(){
+        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+
+        //TODO: Is there a better way of doing this?
+        String rawSql;
+        rawSql = "" +
+                "SELECT " +
+                "t.id, " +
+                "t.name, " +
+                "SUM(s.score) as points, " +
+                "IFNULL(w.wins, 0) as wins, " +
+                "IFNULL(ties.ties, 0) as ties, " +
+                "IFNULL(l.losses, 0) as losses " +
+                "FROM score s " +
+                "INNER JOIN team t ON t.id = s.teamid " +
+                "LEFT JOIN " +
+                "(SELECT t.id as id, " +
+                "COUNT(*) as wins " +
+                "FROM score s " +
+                "INNER JOIN team t ON t.id = s.teamid " +
+                "WHERE s.winpts = 3 " +
+                "GROUP BY t.id) AS w ON w.id = t.id " +
+                "LEFT JOIN " +
+                "(SELECT t.id as id, " +
+                "COUNT(*) as ties " +
+                "FROM score s " +
+                "INNER JOIN team t ON t.id = s.teamid " +
+                "WHERE s.winpts = 1 " +
+                "GROUP BY t.id) AS ties ON ties.id = t.id " +
+                "LEFT JOIN " +
+                "(SELECT t.id as id, " +
+                "COUNT(*) as losses " +
+                "FROM score s " +
+                "INNER JOIN team t ON t.id = s.teamid " +
+                "WHERE s.winpts = 0 " +
+                "GROUP BY t.id) AS l ON l.id = t.id " +
+                "GROUP BY t.id " +
+                "ORDER BY wins DESC, points DESC";
+
+        return database.rawQuery(rawSql, null);
     }
 
     public static Cursor getTeamLeaderBoard(){

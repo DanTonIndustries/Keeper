@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.antonnazareth.keeper.EntityClasses.UserEntity;
 import com.example.antonnazareth.keeper.data.DbUtils;
-import com.example.antonnazareth.keeper.data.KeeperContract;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class AddTeam extends ActionBarActivity {
 
     //public ArrayAdapter<String> mTeamUsersAdapter;
-    public CustomAdapter mTeamUsersAdapter;
+    public CustomUserAdapter mTeamUsersAdapter;
     private String customFont = uiUtilities.CUSTOM_FONT;
 
 
@@ -44,12 +44,14 @@ public class AddTeam extends ActionBarActivity {
         ListView listView = (ListView) findViewById(R.id.list_view_team_users);
         String[] values = new String[]{};
 
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            arrayList.add(values[i]);
-        }
-        mTeamUsersAdapter = new CustomAdapter(this, arrayList, R.drawable
-                .clouds);
+//        ArrayList<String> arrayList = new ArrayList<String>();
+//        for (int i = 0; i < values.length; ++i) {
+//            arrayList.add(values[i]);
+//        }
+
+        ArrayList<UserEntity> arrayList = new ArrayList<UserEntity>();
+
+        mTeamUsersAdapter = new CustomUserAdapter(this, arrayList, R.drawable.user);
 
         //TODO: Mega query for scores.
 
@@ -70,8 +72,8 @@ public class AddTeam extends ActionBarActivity {
         TextView teamMembersTextView = (TextView) findViewById(R.id.teamMembersTextView);
         teamMembersTextView.setTypeface(font);
 
-        TextView teamNameTextView = (TextView) findViewById(R.id.teamNameTextView);
-        teamNameTextView.setTypeface(font);
+//        TextView teamNameTextView = (TextView) findViewById(R.id.teamNameTextView);
+//        teamNameTextView.setTypeface(font);
 
         Button addUserButton = (Button) findViewById(R.id.addUserToTeam);
         addUserButton.setTypeface(font);
@@ -91,7 +93,7 @@ public class AddTeam extends ActionBarActivity {
         confirmTeamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText teamNameEditText = (EditText) findViewById(R.id.teamNameEditTxt);
+                EditText teamNameEditText = (EditText) findViewById(R.id.teamNameEditText);
                 String teamName = teamNameEditText.getText().toString();
                 if (teamName.equals("")){
                     //please enter team name
@@ -99,9 +101,17 @@ public class AddTeam extends ActionBarActivity {
                     finish();
                 }
                 else{
-                    DbUtils.addTeam(teamName);
+                    long teamRowId = DbUtils.addTeam(teamName);
+                    int teamId = (int) teamRowId;
+                    for(int i=0 ; i<mTeamUsersAdapter.getCount() ; i++){
+                        UserEntity userEntity = mTeamUsersAdapter.getEntity(i);
+                        int userId = userEntity.id ;
+                        DbUtils.addTeamUser(teamId, userId);
+                    }
+
+
                     Intent returnTeamNameIntent = new Intent(view.getContext(), SelectTeamActivity.class)
-                            .putExtra("teamName", teamName);
+                            .putExtra("teamId", teamId);
                     setResult(RESULT_OK, returnTeamNameIntent);
                     finish();
                 }
@@ -153,16 +163,24 @@ public class AddTeam extends ActionBarActivity {
                                     Intent intent) {
         if(resultCode == Activity.RESULT_OK ) {
 
-            String userName = intent.getExtras().getString("userName");
-            updateTeamList(userName);
+            int userId = intent.getIntExtra("userId", 0);
+            updateTeamListFromId(userId);
 
         }
-
     }
 
-    public void updateTeamList(String userName){
+    public void updateTeamList(UserEntity entity){
 
-        mTeamUsersAdapter.add(userName);
+        mTeamUsersAdapter.add(entity);
+        mTeamUsersAdapter.notifyDataSetChanged();
+    }
+
+    public void updateTeamListFromId(int userId){
+
+        Cursor cursor = DbUtils.getUserById(userId);
+        cursor.moveToFirst();
+        UserEntity entity = new UserEntity(cursor);
+        mTeamUsersAdapter.add(entity);
         mTeamUsersAdapter.notifyDataSetChanged();
     }
 
@@ -170,20 +188,20 @@ public class AddTeam extends ActionBarActivity {
         String bob = "1";
     }
 
-    public void queryDatabase(){
-
-        mTeamUsersAdapter.clearData();
-
-        // A cursor is your primary interface to the query results.
-        Cursor cursor = DbUtils.getAllTeams();
-
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            String teamName = cursor.getString(
-                    cursor.getColumnIndexOrThrow(KeeperContract.TeamEntry.COLUMN_TEAM_NAME)
-            );
-            updateTeamList(teamName);
-            cursor.moveToNext();
-        }
-    }
+//    public void queryDatabase(){
+//
+//        mTeamUsersAdapter.clearData();
+//
+//        // A cursor is your primary interface to the query results.
+//        Cursor cursor = DbUtils.getAllTeams();
+//
+//        cursor.moveToFirst();
+//        while (!cursor.isAfterLast()) {
+//            String teamName = cursor.getString(
+//                    cursor.getColumnIndexOrThrow(KeeperContract.TeamEntry.COLUMN_TEAM_NAME)
+//            );
+//            updateTeamList(teamName);
+//            cursor.moveToNext();
+//        }
+//    }
 }

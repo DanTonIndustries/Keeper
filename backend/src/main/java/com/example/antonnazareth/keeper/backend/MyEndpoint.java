@@ -9,10 +9,13 @@ package com.example.antonnazareth.keeper.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
-
-import java.sql.*;
 import com.google.appengine.api.utils.SystemProperty;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import javax.inject.Named;
@@ -88,13 +91,13 @@ public class MyEndpoint {
         } finally {
             if (rs != null) try { rs.close(); } catch (Exception e) {
                 response = response +
-                    "Rs: " + e.getLocalizedMessage() + ", "; }
+                        "Rs: " + e.getLocalizedMessage() + ", "; }
             if (ps != null) try { ps.close(); } catch (Exception e) { response
                     = response +
                     "Stmt: " + e.getLocalizedMessage() + ", "; }
             if (conn != null) try { conn.close(); } catch (Exception e) {
                 response = response +
-                    "Conn: " + e.getLocalizedMessage(); }
+                        "Conn: " + e.getLocalizedMessage(); }
         }
         bean.setStringData(response);
         return bean;
@@ -461,7 +464,7 @@ public class MyEndpoint {
     }
 
     @ApiMethod(name = "getGames", path="query/game")
-         public MyBean getGames() {
+    public MyBean getGames() {
         logger.info("Calling getGames method");
         MyBean bean = new MyBean();
 
